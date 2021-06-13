@@ -1,7 +1,7 @@
 const WHITESPACE = " \n\t";
 const DIGITS = "0123456789";
 
-const TokenType = require("./token_type");
+const TokenType = require("./tokenType");
 
 class Lexer {
     constructor(text) {
