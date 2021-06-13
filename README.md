@@ -1,33 +1,43 @@
 ```js
 Expression
-1 + 2 * 5 + 11
+((81 # 2) ** 2 - 17) LB 2
 
 Tokens
 [
-  { TokenType: 'Number', TokenValue: 1 },
-  { TokenType: 'Plus', TokenValue: '+' },
+  { TokenType: 'LParen', TokenValue: '(' },
+  { TokenType: 'LParen', TokenValue: '(' },
+  { TokenType: 'Number', TokenValue: 81 },
+  { TokenType: 'NTHRoot', TokenValue: '#' },
   { TokenType: 'Number', TokenValue: 2 },
-  { TokenType: 'Multiply', TokenValue: '*' },
-  { TokenType: 'Number', TokenValue: 5 },
-  { TokenType: 'Plus', TokenValue: '+' },
-  { TokenType: 'Number', TokenValue: 11 }
+  { TokenType: 'RParen', TokenValue: ')' },
+  { TokenType: 'Pow', TokenValue: '**' },
+  { TokenType: 'Number', TokenValue: 2 },
+  { TokenType: 'Minus', TokenValue: '-' },
+  { TokenType: 'Number', TokenValue: 17 },
+  { TokenType: 'RParen', TokenValue: ')' },
+  { TokenType: 'LogNBaseX', TokenValue: 'LB' },
+  { TokenType: 'Number', TokenValue: 2 }
 ]
 
-Parse Tree
+Tree
 {
-  nodeType: 'AddNode',
+  nodeType: 'LogNBaseXNode',
   node1: {
-    nodeType: 'AddNode',
-    node1: { nodeType: 'NumberNode', value: 1 },
-    node2: {
-      nodeType: 'MulNode',
-      node1: { nodeType: 'NumberNode', value: 2 },
-      node2: { nodeType: 'NumberNode', value: 5 }
-    }
+    nodeType: 'SubNode',
+    node1: {
+      nodeType: 'PowNode',
+      node1: {
+        nodeType: 'NthRootNode',
+        node1: { nodeType: 'NumberNode', value: 81 },
+        node2: { nodeType: 'NumberNode', value: 2 }
+      },
+      node2: { nodeType: 'NumberNode', value: 2 }
+    },
+    node2: { nodeType: 'NumberNode', value: 17 }
   },
-  node2: { nodeType: 'NumberNode', value: 11 }
+  node2: { nodeType: 'NumberNode', value: 2 }
 }
 
-Order Of Evaluation
-((1 + (2 * 5)) + 11) => 22
+Order of Evaluation
+((((81 # 2) ** 2) - 17) LB 2) => 6
 ```
