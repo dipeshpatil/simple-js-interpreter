@@ -1,4 +1,5 @@
 const Token = require("../Lexer/token");
+const Node = require("./nodes");
 
 class Parser {
     constructor(tokens) {
@@ -18,7 +19,7 @@ class Parser {
     }
 
     raiseError() {
-        throw "Invalid Syntax";
+        throw new Error("Invalid Syntax");
     }
 
     parse() {
@@ -39,14 +40,14 @@ class Parser {
             if (this.currentToken.TokenType === Token.PLUS) {
                 this.advance();
                 result = {
-                    nodeType: "AddNode",
+                    nodeType: Node.ADD,
                     node1: result,
                     node2: this.term(),
                 };
             } else if (this.currentToken.TokenType === Token.MINUS) {
                 this.advance();
                 result = {
-                    nodeType: "SubNode",
+                    nodeType: Node.SUB,
                     node1: result,
                     node2: this.term(),
                 };
@@ -66,14 +67,14 @@ class Parser {
             if (this.currentToken.TokenType === Token.MULTIPLY) {
                 this.advance();
                 result = {
-                    nodeType: "MultiplyNode",
+                    nodeType: Node.MUL,
                     node1: result,
                     node2: this.factor(),
                 };
             } else if (this.currentToken.TokenType === Token.DIVIDE) {
                 this.advance();
                 result = {
-                    nodeType: "DivideNode",
+                    nodeType: Node.DIV,
                     node1: result,
                     node2: this.factor(),
                 };
@@ -95,22 +96,24 @@ class Parser {
             let value = this.currentToken.TokenValue;
             this.advance();
             return {
-                nodeType: "NumberNode",
+                nodeType: Node.NUMBER,
                 value: value,
             };
         } else if (this.currentToken.TokenType === Token.PLUS) {
             this.advance();
             return {
-                nodeType: "PlusNode",
+                nodeType: Node.PLUS,
                 node: this.factor(),
             };
         } else if (this.currentToken.TokenType === Token.MINUS) {
             this.advance();
             return {
-                nodeType: "MinusNode",
+                nodeType: Node.MINUS,
                 node: this.factor(),
             };
         }
+
+        this.raiseError();
     }
 }
 
