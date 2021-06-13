@@ -1,19 +1,21 @@
 const WHITESPACE = " \n\t";
 const DIGITS = "0123456789";
 
+const TokenType = require("./token_type");
+
 class Lexer {
     constructor(text) {
         this.currentChar = "";
         this.index = 0;
         this.text = text;
-        this.advance();
         this.tokens = [];
+
+        this.advance();
     }
 
     advance() {
         try {
             this.currentChar = this.text[this.index++];
-            console.log(this.currentChar);
         } catch (e) {
             console.log(e);
             this.currentChar = undefined;
@@ -26,8 +28,36 @@ class Lexer {
             else if (
                 this.currentChar === "." ||
                 DIGITS.includes(this.currentChar)
-            )
+            ) {
                 this.tokens.push(this.generateNumber());
+            } else if (this.currentChar === "+") {
+                this.advance();
+                this.tokens.push(TokenType.PLUS);
+            } else if (this.currentChar === "-") {
+                this.advance();
+                this.tokens.push(TokenType.MINUS);
+            } else if (this.currentChar === "*") {
+                this.advance();
+                if (this.currentChar === "*") {
+                    this.advance();
+                    this.tokens.push(TokenType.POW);
+                } else this.tokens.push(TokenType.MULTIPLY);
+            } else if (this.currentChar === "/") {
+                this.advance();
+                if (this.currentChar === "/") {
+                    this.advance();
+                    this.tokens.push(TokenType.INT_DIVIDE);
+                } else this.tokens.push(TokenType.DIVIDE);
+            } else if (this.currentChar === "%") {
+                this.advance();
+                this.tokens.push(TokenType.MOD);
+            } else if (this.currentChar === "(") {
+                this.advance();
+                this.tokens.push(TokenType.LPAREN);
+            } else if (this.currentChar === ")") {
+                this.advance();
+                this.tokens.push(TokenType.RPAREN);
+            }
         }
 
         return this.tokens;
