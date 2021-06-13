@@ -62,7 +62,15 @@ class Parser {
 
         while (
             this.currentToken !== undefined &&
-            [Token.MULTIPLY, Token.DIVIDE].includes(this.currentToken.TokenType)
+            [
+                Token.MULTIPLY,
+                Token.DIVIDE,
+                Token.MOD,
+                Token.INT_DIVIDE,
+                Token.POW,
+                Token.NTHROOT,
+                Token.LOGNBASEX,
+            ].includes(this.currentToken.TokenType)
         ) {
             if (this.currentToken.TokenType === Token.MULTIPLY) {
                 this.advance();
@@ -75,6 +83,41 @@ class Parser {
                 this.advance();
                 result = {
                     nodeType: Node.DIV,
+                    node1: result,
+                    node2: this.factor(),
+                };
+            } else if (this.currentToken.TokenType === Token.MOD) {
+                this.advance();
+                result = {
+                    nodeType: Node.MOD,
+                    node1: result,
+                    node2: this.factor(),
+                };
+            } else if (this.currentToken.TokenType === Token.INT_DIVIDE) {
+                this.advance();
+                result = {
+                    nodeType: Node.INT_DIVIDE,
+                    node1: result,
+                    node2: this.factor(),
+                };
+            } else if (this.currentToken.TokenType === Token.POW) {
+                this.advance();
+                result = {
+                    nodeType: Node.POW,
+                    node1: result,
+                    node2: this.factor(),
+                };
+            } else if (this.currentToken.TokenType === Token.NTHROOT) {
+                this.advance();
+                result = {
+                    nodeType: Node.NTHROOT,
+                    node1: result,
+                    node2: this.factor(),
+                };
+            } else if (this.currentToken.TokenType === Token.LOGNBASEX) {
+                this.advance();
+                result = {
+                    nodeType: Node.LOGNBASEX,
                     node1: result,
                     node2: this.factor(),
                 };

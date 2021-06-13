@@ -35,6 +35,14 @@ const TokenType = {
         TokenType: "IntDivide",
         TokenValue: "//",
     },
+    NTHROOT: {
+        TokenType: "NTHRoot",
+        TokenValue: "#",
+    },
+    LOGNBASEX: {
+        TokenType: "LogNBaseX",
+        TokenValue: "LB",
+    },
 };
 
 module.exports = TokenType;

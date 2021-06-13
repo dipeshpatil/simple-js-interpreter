@@ -51,6 +51,15 @@ class Lexer {
             } else if (this.currentChar === "%") {
                 this.advance();
                 this.tokens.push(TokenType.MOD);
+            } else if (this.currentChar === "#") {
+                this.advance();
+                this.tokens.push(TokenType.NTHROOT);
+            } else if (this.currentChar === "L") {
+                this.advance();
+                if (this.currentChar === "B") {
+                    this.advance();
+                    this.tokens.push(TokenType.LOGNBASEX);
+                }
             } else if (this.currentChar === "(") {
                 this.advance();
                 this.tokens.push(TokenType.LPAREN);

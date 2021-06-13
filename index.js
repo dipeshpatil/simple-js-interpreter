@@ -2,10 +2,10 @@ const util = require("util");
 
 const Lexer = require("./Lexer/lexer");
 const Parser = require("./Parser/parser");
-const Eval = require("./Evaluator/eval");
+const Evaluate = require("./Evaluator/evaluate");
 const Order = require("./Evaluator/order");
 
-const text = "1 + 2 * 3 - 4 * 5 - 6 + 7";
+const text = "((81 # 2) ** 2 - 17) LB 2";
 
 const lexer = new Lexer(text);
 const tokens = lexer.generateTokens();
@@ -19,4 +19,4 @@ console.log(tokens);
 console.log(
     "\nTree\n" + util.inspect(tree, { showHidden: false, depth: null })
 );
-console.log("\nOrder of Evaluation\n" + Order(tree) + " => " + Eval(tree));
+console.log("\nOrder of Evaluation\n" + Order(tree) + " => " + Evaluate(tree));
