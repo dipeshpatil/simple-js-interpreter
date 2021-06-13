@@ -58,20 +58,19 @@ class Parser {
 
     term() {
         let result = this.factor();
-        let token = this.currentToken;
 
         while (
-            token !== undefined &&
-            [Token.MULTIPLY, Token.DIVIDE].includes(token.TokenType)
+            this.currentToken !== undefined &&
+            [Token.MULTIPLY, Token.DIVIDE].includes(this.currentToken.TokenType)
         ) {
-            if (token.TokenType === Token.MULTIPLY) {
+            if (this.currentToken.TokenType === Token.MULTIPLY) {
                 this.advance();
                 result = {
                     nodeType: "MultiplyNode",
                     node1: result,
                     node2: this.factor(),
                 };
-            } else if (token.TokenType === Token.DIVIDE) {
+            } else if (this.currentToken.TokenType === Token.DIVIDE) {
                 this.advance();
                 result = {
                     nodeType: "DivideNode",
@@ -80,34 +79,32 @@ class Parser {
                 };
             }
         }
+
+        return result;
     }
 
     factor() {
-        let token = this.currentToken;
-
-        if (token.TokenType === Token.LPAREN) {
+        if (this.currentToken.TokenType === Token.LPAREN) {
             this.advance();
             let result = this.expr();
             if (this.currentToken.TokenType !== Token.RPAREN) this.raiseError();
             this.advance();
 
             return result;
-        } else if (
-            token.TokenType === Token.NUMBER &&
-            token.TokenValue !== undefined
-        ) {
+        } else if (this.currentToken.TokenType === Token.NUMBER) {
+            let value = this.currentToken.TokenValue;
             this.advance();
             return {
                 nodeType: "NumberNode",
-                value: token.TokenValue,
+                value: value,
             };
-        } else if (token.TokenType === Token.PLUS) {
+        } else if (this.currentToken.TokenType === Token.PLUS) {
             this.advance();
             return {
                 nodeType: "PlusNode",
                 node: this.factor(),
             };
-        } else if (token.TokenType === Token.MINUS) {
+        } else if (this.currentToken.TokenType === Token.MINUS) {
             this.advance();
             return {
                 nodeType: "MinusNode",
