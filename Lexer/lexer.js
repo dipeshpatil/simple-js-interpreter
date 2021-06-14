@@ -59,6 +59,9 @@ class Lexer {
                 if (this.currentChar === "B") {
                     this.advance();
                     this.tokens.push(TokenType.LOGNBASEX);
+                } else if (this.currentChar === "N") {
+                    this.advance();
+                    this.tokens.push(TokenType.NAT_LOG);
                 }
             } else if (this.currentChar === "(") {
                 this.advance();

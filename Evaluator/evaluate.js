@@ -18,6 +18,10 @@ function logNBaseX(n, x) {
     return Math.log(n) / Math.log(x);
 }
 
+function naturalLog(n) {
+    return Math.log(n);
+}
+
 function evaluate(tree) {
     if (tree.nodeType === Node.NUMBER) {
         return tree.value;
@@ -39,6 +43,8 @@ function evaluate(tree) {
         return nthRoot(evaluate(tree.node1), evaluate(tree.node2));
     } else if (tree.nodeType === Node.LOGNBASEX) {
         return logNBaseX(evaluate(tree.node1), evaluate(tree.node2));
+    } else if (tree.nodeType === Node.NAT_LOG) {
+        return naturalLog(evaluate(tree.node));
     }
 }
 

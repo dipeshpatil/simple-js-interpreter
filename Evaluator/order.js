@@ -75,6 +75,8 @@ function orderOfEvaluation(tree = {}) {
             orderOfEvaluation(tree.node2) +
             ")"
         );
+    } else if (tree.nodeType === Node.NAT_LOG) {
+        return "(" + "LN " + orderOfEvaluation(tree.node) + ")";
     }
 }
 

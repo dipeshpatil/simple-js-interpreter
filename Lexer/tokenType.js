@@ -43,6 +43,10 @@ const TokenType = {
         TokenType: "LogNBaseX",
         TokenValue: "LB",
     },
+    NAT_LOG: {
+        TokenType: "NaturalLog",
+        TokenValue: "LN",
+    },
 };
 
 module.exports = TokenType;

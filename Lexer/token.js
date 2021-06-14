@@ -12,6 +12,7 @@ const Token = {
     POW: "Pow",
     NTHROOT: "NTHRoot",
     LOGNBASEX: "LogNBaseX",
+    NAT_LOG: "NaturalLog",
 
     LPAREN: "LParen",
     RPAREN: "RParen",

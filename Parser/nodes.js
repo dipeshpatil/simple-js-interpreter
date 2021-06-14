@@ -14,6 +14,7 @@ const Node = {
     POW: "PowNode",
 
     LOGNBASEX: "LogNBaseXNode",
+    NAT_LOG: "NaturalLogNode",
     NTHROOT: "NthRootNode",
 };
 

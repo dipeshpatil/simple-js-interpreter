@@ -154,6 +154,12 @@ class Parser {
                 nodeType: Node.MINUS,
                 node: this.factor(),
             };
+        } else if (this.currentToken.TokenType === Token.NAT_LOG) {
+            this.advance();
+            return {
+                nodeType: Node.NAT_LOG,
+                node: this.factor(),
+            };
         }
 
         this.raiseError();

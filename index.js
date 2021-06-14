@@ -5,7 +5,7 @@ const Parser = require("./Parser/parser");
 const Evaluate = require("./Evaluator/evaluate");
 const Order = require("./Evaluator/order");
 
-const text = "((81 # 2) ** 2 - 17) LB 2";
+const text = "LN 2 + LN 10";
 
 const lexer = new Lexer(text);
 const tokens = lexer.generateTokens();
