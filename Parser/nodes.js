@@ -16,6 +16,9 @@ const Node = {
     LOGNBASEX: "LogNBaseXNode",
     NAT_LOG: "NaturalLogNode",
     NTHROOT: "NthRootNode",
+
+    BINARY: "BinaryConversionNode",
+    DECIMAL: "DecimalConversionNode",
 };
 
 module.exports = Node;

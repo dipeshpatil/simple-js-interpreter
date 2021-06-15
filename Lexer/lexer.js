@@ -69,6 +69,15 @@ class Lexer {
             } else if (this.currentChar === ")") {
                 this.advance();
                 this.tokens.push(TokenType.RPAREN);
+            } else if (this.currentChar === '~') {
+                this.advance();
+                if (this.currentChar === 'b') {
+                    this.advance();
+                    this.tokens.push(TokenType.BINARY)
+                } else if (this.currentChar === 'd') {
+                    this.advance();
+                    this.tokens.push(TokenType.DECIMAL)
+                }
             }
         }
 

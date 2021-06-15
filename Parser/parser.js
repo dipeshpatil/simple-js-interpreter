@@ -160,6 +160,18 @@ class Parser {
                 nodeType: Node.NAT_LOG,
                 node: this.factor(),
             };
+        } else if (this.currentToken.TokenType === Token.BINARY) {
+            this.advance();
+            return {
+                nodeType: Node.BINARY,
+                node: this.factor(),
+            }
+        } else if (this.currentToken.TokenType === Token.DECIMAL) {
+            this.advance();
+            return {
+                nodeType: Node.DECIMAL,
+                node: this.factor(),
+            }
         }
 
         this.raiseError();

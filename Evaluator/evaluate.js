@@ -22,6 +22,14 @@ function naturalLog(n) {
     return Math.log(n);
 }
 
+function convertDecimalToBinary(n) {
+    return parseInt(n).toString(2);
+}
+
+function convertBinaryToDecimal(b) {
+    return parseFloat(parseInt(b.toString(), 2).toString());
+}
+
 function evaluate(tree) {
     if (tree.nodeType === Node.NUMBER) {
         return tree.value;
@@ -45,6 +53,10 @@ function evaluate(tree) {
         return logNBaseX(evaluate(tree.node1), evaluate(tree.node2));
     } else if (tree.nodeType === Node.NAT_LOG) {
         return naturalLog(evaluate(tree.node));
+    } else if (tree.nodeType === Node.BINARY) {
+        return convertDecimalToBinary(evaluate(tree.node));
+    } else if (tree.nodeType === Node.DECIMAL) {
+        return convertBinaryToDecimal(evaluate(tree.node));
     }
 }
 

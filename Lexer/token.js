@@ -14,6 +14,10 @@ const Token = {
     LOGNBASEX: "LogNBaseX",
     NAT_LOG: "NaturalLog",
 
+    CONVERSION: "Conversion",
+    BINARY: "Binary",
+    DECIMAL: 'Decimal',
+
     LPAREN: "LParen",
     RPAREN: "RParen",
 };
