@@ -1,75 +1,78 @@
+const Token = require("./token");
+const Operator = require("./operator");
+
 const TokenType = {
     LPAREN: {
-        TokenType: "LParen",
-        TokenValue: "(",
+        TokenType: Token.LPAREN,
+        TokenValue: Operator.LPAREN,
     },
     RPAREN: {
-        TokenType: "RParen",
-        TokenValue: ")",
+        TokenType: Token.RPAREN,
+        TokenValue: Operator.RPAREN,
     },
     PLUS: {
-        TokenType: "Plus",
-        TokenValue: "+",
+        TokenType: Token.PLUS,
+        TokenValue: Operator.PLUS,
     },
     MINUS: {
-        TokenType: "Minus",
-        TokenValue: "-",
+        TokenType: Token.MINUS,
+        TokenValue: Operator.MINUS,
     },
     MULTIPLY: {
-        TokenType: "Multiply",
-        TokenValue: "*",
+        TokenType: Token.MULTIPLY,
+        TokenValue: Operator.MULTIPLY,
     },
     DIVIDE: {
-        TokenType: "Divide",
-        TokenValue: "/",
+        TokenType: Token.DIVIDE,
+        TokenValue: Operator.DIVIDE,
     },
     MOD: {
-        TokenType: "Mod",
-        TokenValue: "%",
+        TokenType: Token.MOD,
+        TokenValue: Operator.MOD,
     },
     POW: {
-        TokenType: "Pow",
-        TokenValue: "**",
+        TokenType: Token.POW,
+        TokenValue: Operator.POW,
     },
     INT_DIVIDE: {
-        TokenType: "IntDivide",
-        TokenValue: "//",
+        TokenType: Token.INT_DIVIDE,
+        TokenValue: Operator.INT_DIVIDE,
     },
     NTHROOT: {
-        TokenType: "NTHRoot",
-        TokenValue: "#",
+        TokenType: Token.NTHROOT,
+        TokenValue: Operator.NTHROOT,
     },
     LOGNBASEX: {
-        TokenType: "LogNBaseX",
-        TokenValue: "LB",
+        TokenType: Token.LOGNBASEX,
+        TokenValue: Operator.LOGNBASEX,
     },
     NAT_LOG: {
-        TokenType: "NaturalLog",
-        TokenValue: "LN",
+        TokenType: Token.NAT_LOG,
+        TokenValue: Operator.NAT_LOG,
     },
     BINARY_STRING: {
-        TokenType: "BinaryString",
-        TokenValue: "b",
+        TokenType: Token.BINARY_STRING,
+        TokenValue: Operator.BINARY_STRING,
     },
     BINARY: {
-        TokenType: "Binary",
-        TokenValue: "B",
+        TokenType: Token.BINARY,
+        TokenValue: Operator.BINARY,
     },
     HEXADECIMAL_STRING: {
-        TokenType: "HexaDecimalString",
-        TokenValue: "h",
+        TokenType: Token.HEXADECIMAL_STRING,
+        TokenValue: Operator.HEXADECIMAL_STRING,
     },
     HEXADECIMAL: {
-        TokenType: "HexaDecimal",
-        TokenValue: "H",
+        TokenType: Token.HEXADECIMAL,
+        TokenValue: Operator.HEXADECIMAL,
     },
     OCTAL_STRING: {
-        TokenType: "OctalString",
-        TokenValue: "o",
+        TokenType: Token.OCTAL_STRING,
+        TokenValue: Operator.OCTAL_STRING,
     },
     OCTAL: {
-        TokenType: "Octal",
-        TokenValue: "O",
+        TokenType: Token.OCTAL,
+        TokenValue: Operator.OCTAL,
     },
 };
 

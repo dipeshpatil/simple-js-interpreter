@@ -6,6 +6,7 @@ const HEXADECIMAL_DIGITS = DIGITS + "ABCDEF";
 const OCTAL_DIGITS = "01234567";
 
 const TokenType = require("./tokenType");
+const Operator = require("./operator");
 
 class Lexer {
     constructor(text) {
@@ -34,34 +35,34 @@ class Lexer {
                 DIGITS.includes(this.currentChar)
             ) {
                 this.tokens.push(this.generateNumber());
-            } else if (this.currentChar === "(") {
+            } else if (this.currentChar === Operator.LPAREN) {
                 this.advance();
                 this.tokens.push(TokenType.LPAREN);
-            } else if (this.currentChar === ")") {
+            } else if (this.currentChar === Operator.RPAREN) {
                 this.advance();
                 this.tokens.push(TokenType.RPAREN);
-            } else if (this.currentChar === "+") {
+            } else if (this.currentChar === Operator.PLUS) {
                 this.advance();
                 this.tokens.push(TokenType.PLUS);
-            } else if (this.currentChar === "-") {
+            } else if (this.currentChar === Operator.MINUS) {
                 this.advance();
                 this.tokens.push(TokenType.MINUS);
-            } else if (this.currentChar === "*") {
+            } else if (this.currentChar === Operator.MULTIPLY) {
                 this.advance();
-                if (this.currentChar === "*") {
+                if (this.currentChar === Operator.MULTIPLY) {
                     this.advance();
                     this.tokens.push(TokenType.POW);
                 } else this.tokens.push(TokenType.MULTIPLY);
-            } else if (this.currentChar === "/") {
+            } else if (this.currentChar === Operator.DIVIDE) {
                 this.advance();
-                if (this.currentChar === "/") {
+                if (this.currentChar === Operator.DIVIDE) {
                     this.advance();
                     this.tokens.push(TokenType.INT_DIVIDE);
                 } else this.tokens.push(TokenType.DIVIDE);
-            } else if (this.currentChar === "%") {
+            } else if (this.currentChar === Operator.MOD) {
                 this.advance();
                 this.tokens.push(TokenType.MOD);
-            } else if (this.currentChar === "#") {
+            } else if (this.currentChar === Operator.NTHROOT) {
                 this.advance();
                 this.tokens.push(TokenType.NTHROOT);
             } else if (this.currentChar === "L") {
@@ -75,23 +76,23 @@ class Lexer {
                 }
             } else if (this.currentChar === STRING_CHAR) {
                 this.advance();
-                if (this.currentChar === "b") {
+                if (this.currentChar === Operator.BINARY_STRING) {
                     this.advance();
                     this.tokens.push(this.generateBinaryString());
-                } else if (this.currentChar === "h") {
+                } else if (this.currentChar === Operator.HEXADECIMAL_STRING) {
                     this.advance();
                     this.tokens.push(this.generateHexaDecimalString());
-                } else if (this.currentChar === "o") {
+                } else if (this.currentChar === Operator.OCTAL_STRING) {
                     this.advance();
                     this.tokens.push(this.generateOctalString());
                 }
-            } else if (this.currentChar === "B") {
+            } else if (this.currentChar === Operator.BINARY) {
                 this.advance();
                 this.tokens.push(TokenType.BINARY);
-            } else if (this.currentChar === "H") {
+            } else if (this.currentChar === Operator.HEXADECIMAL) {
                 this.advance();
                 this.tokens.push(TokenType.HEXADECIMAL);
-            } else if (this.currentChar === "O") {
+            } else if (this.currentChar === Operator.OCTAL) {
                 this.advance();
                 this.tokens.push(TokenType.OCTAL);
             }

@@ -6,8 +6,8 @@ const Node = {
 
     ADD: "AddNode",
     SUB: "SubNode",
-    MUL: "MulNode",
-    DIV: "DivNode",
+    MUL: "MultiplyNode",
+    DIV: "DivideNode",
 
     MOD: "ModNode",
     INT_DIVIDE: "IntDivideNode",
