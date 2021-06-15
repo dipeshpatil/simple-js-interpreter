@@ -7,6 +7,7 @@ const OCTAL_DIGITS = "01234567";
 
 const TokenType = require("./tokenType");
 const Operator = require("./operator");
+const Token = require("./token");
 
 class Lexer {
     constructor(text) {
@@ -117,7 +118,7 @@ class Lexer {
         this.advance();
 
         return {
-            TokenType: "OctalString",
+            TokenType: Token.OCTAL_STRING,
             TokenValue: currentOctalString,
         };
     }
@@ -138,7 +139,7 @@ class Lexer {
         this.advance();
 
         return {
-            TokenType: "HexaDecimalString",
+            TokenType: Token.HEXADECIMAL_STRING,
             TokenValue: currentHexaDecimalString.toUpperCase(),
         };
     }
@@ -159,7 +160,7 @@ class Lexer {
         this.advance();
 
         return {
-            TokenType: "BinaryString",
+            TokenType: Token.BINARY_STRING,
             TokenValue: currentBinaryString,
         };
     }
@@ -187,7 +188,7 @@ class Lexer {
         if (currentNumber.endsWith(".")) currentNumber += "0";
 
         return {
-            TokenType: "Number",
+            TokenType: Token.NUMBER,
             TokenValue: parseFloat(currentNumber),
         };
     }
