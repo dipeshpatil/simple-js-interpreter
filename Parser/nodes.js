@@ -17,8 +17,14 @@ const Node = {
     NAT_LOG: "NaturalLogNode",
     NTHROOT: "NthRootNode",
 
-    BINARY: "BinaryConversionNode",
-    DECIMAL: "DecimalConversionNode",
+    BINARY_STRING: "BinaryStringNode",
+    BINARY: "BinaryNode",
+
+    HEXADECIMAL_STRING: "HexaDecimalStringNode",
+    HEXADECIMAL: "HexaDecimalNode",
+
+    OCTAL_STRING: "OctalStringNode",
+    OCTAL: "OctalNode",
 };
 
 module.exports = Node;

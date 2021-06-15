@@ -142,6 +142,27 @@ class Parser {
                 nodeType: Node.NUMBER,
                 value: value,
             };
+        } else if (this.currentToken.TokenType === Token.BINARY_STRING) {
+            let value = this.currentToken.TokenValue;
+            this.advance();
+            return {
+                nodeType: Node.BINARY_STRING,
+                value: value,
+            };
+        } else if (this.currentToken.TokenType === Token.HEXADECIMAL_STRING) {
+            let value = this.currentToken.TokenValue;
+            this.advance();
+            return {
+                nodeType: Node.HEXADECIMAL_STRING,
+                value: value,
+            };
+        } else if (this.currentToken.TokenType === Token.OCTAL_STRING) {
+            let value = this.currentToken.TokenValue;
+            this.advance();
+            return {
+                nodeType: Node.OCTAL_STRING,
+                value: value,
+            };
         } else if (this.currentToken.TokenType === Token.PLUS) {
             this.advance();
             return {
@@ -165,13 +186,19 @@ class Parser {
             return {
                 nodeType: Node.BINARY,
                 node: this.factor(),
-            }
-        } else if (this.currentToken.TokenType === Token.DECIMAL) {
+            };
+        } else if (this.currentToken.TokenType === Token.HEXADECIMAL) {
             this.advance();
             return {
-                nodeType: Node.DECIMAL,
+                nodeType: Node.HEXADECIMAL,
                 node: this.factor(),
-            }
+            };
+        } else if (this.currentToken.TokenType === Token.OCTAL) {
+            this.advance();
+            return {
+                nodeType: Node.OCTAL,
+                node: this.factor(),
+            };
         }
 
         this.raiseError();

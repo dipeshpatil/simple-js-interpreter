@@ -77,10 +77,6 @@ function orderOfEvaluation(tree = {}) {
         );
     } else if (tree.nodeType === Node.NAT_LOG) {
         return "(" + "LN " + orderOfEvaluation(tree.node) + ")";
-    } else if (tree.nodeType === Node.BINARY) {
-        return "b(" + orderOfEvaluation(tree.node) + ")";
-    } else if (tree.nodeType === Node.DECIMAL) {
-        return "d(" + orderOfEvaluation(tree.node) + ")";
     }
 }
 

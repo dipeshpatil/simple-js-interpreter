@@ -1,5 +1,9 @@
 const WHITESPACE = " \n\t";
 const DIGITS = "0123456789";
+const STRING_CHAR = "`";
+const BINARY_DIGITS = "01";
+const HEXADECIMAL_DIGITS = DIGITS + "ABCDEF";
+const OCTAL_DIGITS = "01234567";
 
 const TokenType = require("./tokenType");
 
@@ -30,6 +34,12 @@ class Lexer {
                 DIGITS.includes(this.currentChar)
             ) {
                 this.tokens.push(this.generateNumber());
+            } else if (this.currentChar === "(") {
+                this.advance();
+                this.tokens.push(TokenType.LPAREN);
+            } else if (this.currentChar === ")") {
+                this.advance();
+                this.tokens.push(TokenType.RPAREN);
             } else if (this.currentChar === "+") {
                 this.advance();
                 this.tokens.push(TokenType.PLUS);
@@ -63,25 +73,94 @@ class Lexer {
                     this.advance();
                     this.tokens.push(TokenType.NAT_LOG);
                 }
-            } else if (this.currentChar === "(") {
+            } else if (this.currentChar === STRING_CHAR) {
                 this.advance();
-                this.tokens.push(TokenType.LPAREN);
-            } else if (this.currentChar === ")") {
-                this.advance();
-                this.tokens.push(TokenType.RPAREN);
-            } else if (this.currentChar === '~') {
-                this.advance();
-                if (this.currentChar === 'b') {
+                if (this.currentChar === "b") {
                     this.advance();
-                    this.tokens.push(TokenType.BINARY)
-                } else if (this.currentChar === 'd') {
+                    this.tokens.push(this.generateBinaryString());
+                } else if (this.currentChar === "h") {
                     this.advance();
-                    this.tokens.push(TokenType.DECIMAL)
+                    this.tokens.push(this.generateHexaDecimalString());
+                } else if (this.currentChar === "o") {
+                    this.advance();
+                    this.tokens.push(this.generateOctalString());
                 }
+            } else if (this.currentChar === "B") {
+                this.advance();
+                this.tokens.push(TokenType.BINARY);
+            } else if (this.currentChar === "H") {
+                this.advance();
+                this.tokens.push(TokenType.HEXADECIMAL);
+            } else if (this.currentChar === "O") {
+                this.advance();
+                this.tokens.push(TokenType.OCTAL);
             }
         }
 
         return this.tokens;
+    }
+
+    generateOctalString() {
+        var currentOctalString = this.currentChar;
+        this.advance();
+
+        while (
+            (this.currentChar !== undefined ||
+                this.currentChar !== STRING_CHAR) &&
+            OCTAL_DIGITS.includes(this.currentChar)
+        ) {
+            currentOctalString += this.currentChar;
+            this.advance();
+        }
+
+        this.advance();
+
+        return {
+            TokenType: "OctalString",
+            TokenValue: currentOctalString,
+        };
+    }
+
+    generateHexaDecimalString() {
+        var currentHexaDecimalString = this.currentChar.toUpperCase();
+        this.advance();
+
+        while (
+            (this.currentChar !== undefined ||
+                this.currentChar !== STRING_CHAR) &&
+            HEXADECIMAL_DIGITS.includes(this.currentChar.toUpperCase())
+        ) {
+            currentHexaDecimalString += this.currentChar;
+            this.advance();
+        }
+
+        this.advance();
+
+        return {
+            TokenType: "HexaDecimalString",
+            TokenValue: currentHexaDecimalString.toUpperCase(),
+        };
+    }
+
+    generateBinaryString() {
+        var currentBinaryString = this.currentChar;
+        this.advance();
+
+        while (
+            (this.currentChar !== undefined ||
+                this.currentChar !== STRING_CHAR) &&
+            BINARY_DIGITS.includes(this.currentChar)
+        ) {
+            currentBinaryString += this.currentChar;
+            this.advance();
+        }
+
+        this.advance();
+
+        return {
+            TokenType: "BinaryString",
+            TokenValue: currentBinaryString,
+        };
     }
 
     generateNumber() {

@@ -30,9 +30,31 @@ function convertBinaryToDecimal(b) {
     return parseFloat(parseInt(b.toString(), 2).toString());
 }
 
+function convertDecimalToHexaDecimal(n) {
+    return parseInt(n).toString(16);
+}
+
+function convertHexaDecimalToDecimal(b) {
+    return parseFloat(parseInt(b.toString(), 16).toString());
+}
+
+function convertDecimalToOctal(n) {
+    return parseInt(n).toString(8);
+}
+
+function convertOctalToDecimal(b) {
+    return parseFloat(parseInt(b.toString(), 8).toString());
+}
+
 function evaluate(tree) {
     if (tree.nodeType === Node.NUMBER) {
         return tree.value;
+    } else if (tree.nodeType === Node.BINARY_STRING) {
+        return convertBinaryToDecimal(tree.value);
+    } else if (tree.nodeType === Node.HEXADECIMAL_STRING) {
+        return convertHexaDecimalToDecimal(tree.value);
+    } else if (tree.nodeType === Node.OCTAL_STRING) {
+        return convertOctalToDecimal(tree.value);
     } else if (tree.nodeType === Node.ADD) {
         return evaluate(tree.node1) + evaluate(tree.node2);
     } else if (tree.nodeType === Node.SUB) {
@@ -55,8 +77,10 @@ function evaluate(tree) {
         return naturalLog(evaluate(tree.node));
     } else if (tree.nodeType === Node.BINARY) {
         return convertDecimalToBinary(evaluate(tree.node));
-    } else if (tree.nodeType === Node.DECIMAL) {
-        return convertBinaryToDecimal(evaluate(tree.node));
+    } else if (tree.nodeType === Node.HEXADECIMAL) {
+        return convertDecimalToHexaDecimal(evaluate(tree.node)).toUpperCase();
+    } else if (tree.nodeType === Node.OCTAL) {
+        return convertDecimalToOctal(evaluate(tree.node));
     }
 }
 
