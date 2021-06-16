@@ -13,6 +13,9 @@ const Node = {
     INT_DIVIDE: "IntDivideNode",
     POW: "PowNode",
 
+    BITWISE_AND: "BitwiseAndNode",
+    BITWISE_OR: "BitwiseOrNode",
+
     LOGNBASEX: "LogNBaseXNode",
     NAT_LOG: "NaturalLogNode",
     NTHROOT: "NthRootNode",

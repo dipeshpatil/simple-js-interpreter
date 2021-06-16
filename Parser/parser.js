@@ -70,6 +70,8 @@ class Parser {
                 Token.POW,
                 Token.NTHROOT,
                 Token.LOGNBASEX,
+                Token.BITWISE_AND,
+                Token.BITWISE_OR,
             ].includes(this.currentToken.TokenType)
         ) {
             if (this.currentToken.TokenType === Token.MULTIPLY) {
@@ -118,6 +120,20 @@ class Parser {
                 this.advance();
                 result = {
                     nodeType: Node.LOGNBASEX,
+                    node1: result,
+                    node2: this.factor(),
+                };
+            } else if (this.currentToken.TokenType === Token.BITWISE_AND) {
+                this.advance();
+                result = {
+                    nodeType: Node.BITWISE_AND,
+                    node1: result,
+                    node2: this.factor(),
+                };
+            } else if (this.currentToken.TokenType === Token.BITWISE_OR) {
+                this.advance();
+                result = {
+                    nodeType: Node.BITWISE_OR,
                     node1: result,
                     node2: this.factor(),
                 };

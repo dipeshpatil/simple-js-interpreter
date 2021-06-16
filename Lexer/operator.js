@@ -20,6 +20,10 @@ const Operator = {
     E: "e",
     P: "p",
     I: "i",
+
+    // Bitwise Operators
+    BITWISE_AND: "&",
+    BITWISE_OR: "|",
 };
 
 module.exports = Operator;

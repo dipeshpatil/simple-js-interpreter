@@ -47,42 +47,83 @@ function convertOctalToDecimal(b) {
 }
 
 function evaluate(tree) {
+    // Number
     if (tree.nodeType === Node.NUMBER) {
         return tree.value;
-    } else if (tree.nodeType === Node.BINARY_STRING) {
+    }
+    // Binary String
+    else if (tree.nodeType === Node.BINARY_STRING) {
         return convertBinaryToDecimal(tree.value);
-    } else if (tree.nodeType === Node.HEXADECIMAL_STRING) {
+    }
+    // HexaDecimal String
+    else if (tree.nodeType === Node.HEXADECIMAL_STRING) {
         return convertHexaDecimalToDecimal(tree.value);
-    } else if (tree.nodeType === Node.OCTAL_STRING) {
+    }
+    // Octal String
+    else if (tree.nodeType === Node.OCTAL_STRING) {
         return convertOctalToDecimal(tree.value);
-    } else if (tree.nodeType === Node.ADD) {
+    }
+    // Add Node
+    else if (tree.nodeType === Node.ADD) {
         return evaluate(tree.node1) + evaluate(tree.node2);
-    } else if (tree.nodeType === Node.SUB) {
+    }
+    // Sub Node
+    else if (tree.nodeType === Node.SUB) {
         return evaluate(tree.node1) - evaluate(tree.node2);
-    } else if (tree.nodeType === Node.MUL) {
+    }
+    // Mul Node
+    else if (tree.nodeType === Node.MUL) {
         return evaluate(tree.node1) * evaluate(tree.node2);
-    } else if (tree.nodeType === Node.DIV) {
+    }
+    // Div Node
+    else if (tree.nodeType === Node.DIV) {
         return evaluate(tree.node1) / evaluate(tree.node2);
-    } else if (tree.nodeType === Node.MOD) {
+    }
+    // Mod Node
+    else if (tree.nodeType === Node.MOD) {
         return evaluate(tree.node1) % evaluate(tree.node2);
-    } else if (tree.nodeType === Node.POW) {
+    }
+    // Pow Node
+    else if (tree.nodeType === Node.POW) {
         return pow(evaluate(tree.node1), evaluate(tree.node2));
-    } else if (tree.nodeType === Node.INT_DIVIDE) {
+    }
+    // Int Divide Node
+    else if (tree.nodeType === Node.INT_DIVIDE) {
         return intDivide(evaluate(tree.node1), evaluate(tree.node2));
-    } else if (tree.nodeType === Node.NTHROOT) {
+    }
+    // NTH Root Node
+    else if (tree.nodeType === Node.NTHROOT) {
         return nthRoot(evaluate(tree.node1), evaluate(tree.node2));
-    } else if (tree.nodeType === Node.LOGNBASEX) {
+    }
+    // Log Base Node
+    else if (tree.nodeType === Node.LOGNBASEX) {
         return logNBaseX(evaluate(tree.node1), evaluate(tree.node2));
-    } else if (tree.nodeType === Node.NAT_LOG) {
+    }
+    // Natural Log Node
+    else if (tree.nodeType === Node.NAT_LOG) {
         return naturalLog(evaluate(tree.node));
-    } else if (tree.nodeType === Node.BINARY) {
+    }
+    // Binary Conversion Node
+    else if (tree.nodeType === Node.BINARY) {
         return `b${convertDecimalToBinary(evaluate(tree.node))}`;
-    } else if (tree.nodeType === Node.HEXADECIMAL) {
+    }
+    // HexaDecimal Conversion Node
+    else if (tree.nodeType === Node.HEXADECIMAL) {
         return `h${convertDecimalToHexaDecimal(
             evaluate(tree.node)
         ).toUpperCase()}`;
-    } else if (tree.nodeType === Node.OCTAL) {
+    }
+    // Octal Conversion Node
+    else if (tree.nodeType === Node.OCTAL) {
         return `o${convertDecimalToOctal(evaluate(tree.node))}`;
+    }
+    // Bitwise And Node
+    else if (tree.nodeType === Node.BITWISE_AND) {
+        return evaluate(tree.node1) & evaluate(tree.node2);
+    }
+    // Bitwise Or Node
+    else if (tree.nodeType === Node.BITWISE_OR) {
+        return evaluate(tree.node1) | evaluate(tree.node2);
     }
 }
 

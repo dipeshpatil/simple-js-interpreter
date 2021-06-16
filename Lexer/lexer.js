@@ -102,6 +102,12 @@ class Lexer {
                     this.advance();
                     this.tokens.push(TokenType.PI);
                 }
+            } else if (this.currentChar === Operator.BITWISE_AND) {
+                this.advance();
+                this.tokens.push(TokenType.BITWISE_AND);
+            } else if (this.currentChar === Operator.BITWISE_OR) {
+                this.advance();
+                this.tokens.push(TokenType.BITWISE_OR);
             }
         }
 

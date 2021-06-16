@@ -13,6 +13,8 @@ const Token = {
     NTHROOT: "NTHRoot",
     LOGNBASEX: "LogNBaseX",
     NAT_LOG: "NaturalLog",
+    BITWISE_AND: "&",
+    BITWISE_OR: "|",
 
     BINARY_STRING: "BinaryString",
     OCTAL_STRING: "OctalString",

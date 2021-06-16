@@ -82,6 +82,14 @@ const TokenType = {
         TokenType: Token.NUMBER,
         TokenValue: Math.PI,
     },
+    BITWISE_AND: {
+        TokenType: Token.BITWISE_AND,
+        TokenValue: Operator.BITWISE_AND,
+    },
+    BITWISE_OR: {
+        TokenType: Token.BITWISE_OR,
+        TokenValue: Operator.BITWISE_OR,
+    },
 };
 
 module.exports = TokenType;
