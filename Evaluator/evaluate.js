@@ -76,7 +76,7 @@ function evaluate(tree) {
     } else if (tree.nodeType === Node.NAT_LOG) {
         return naturalLog(evaluate(tree.node));
     } else if (tree.nodeType === Node.BINARY) {
-        return convertDecimalToBinary(evaluate(tree.node));
+        return `\`b${convertDecimalToBinary(evaluate(tree.node))}\``;
     } else if (tree.nodeType === Node.HEXADECIMAL) {
         return convertDecimalToHexaDecimal(evaluate(tree.node)).toUpperCase();
     } else if (tree.nodeType === Node.OCTAL) {

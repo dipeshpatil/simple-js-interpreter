@@ -5,7 +5,7 @@ const Parser = require("./Parser/parser");
 const Evaluate = require("./Evaluator/evaluate");
 const Order = require("./Evaluator/order");
 
-const text = "B(2 * 2)";
+const text = "(`b10` * `b1000` + `b10000`) LB 2";
 
 const lexer = new Lexer(text);
 const tokens = lexer.generateTokens();

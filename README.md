@@ -1,19 +1,15 @@
 ```js
 Expression
-((81 # 2) ** 2 - 17) LB 2
+(`b10` * `b1000` + `b10000`) LB 2
 
 Tokens
 [
   { TokenType: 'LParen', TokenValue: '(' },
-  { TokenType: 'LParen', TokenValue: '(' },
-  { TokenType: 'Number', TokenValue: 81 },
-  { TokenType: 'NTHRoot', TokenValue: '#' },
-  { TokenType: 'Number', TokenValue: 2 },
-  { TokenType: 'RParen', TokenValue: ')' },
-  { TokenType: 'Pow', TokenValue: '**' },
-  { TokenType: 'Number', TokenValue: 2 },
-  { TokenType: 'Minus', TokenValue: '-' },
-  { TokenType: 'Number', TokenValue: 17 },
+  { TokenType: 'BinaryString', TokenValue: '10' },
+  { TokenType: 'Multiply', TokenValue: '*' },
+  { TokenType: 'BinaryString', TokenValue: '1000' },
+  { TokenType: 'Plus', TokenValue: '+' },
+  { TokenType: 'BinaryString', TokenValue: '10000' },
   { TokenType: 'RParen', TokenValue: ')' },
   { TokenType: 'LogNBaseX', TokenValue: 'LB' },
   { TokenType: 'Number', TokenValue: 2 }
@@ -23,21 +19,17 @@ Tree
 {
   nodeType: 'LogNBaseXNode',
   node1: {
-    nodeType: 'SubNode',
+    nodeType: 'AddNode',
     node1: {
-      nodeType: 'PowNode',
-      node1: {
-        nodeType: 'NthRootNode',
-        node1: { nodeType: 'NumberNode', value: 81 },
-        node2: { nodeType: 'NumberNode', value: 2 }
-      },
-      node2: { nodeType: 'NumberNode', value: 2 }
+      nodeType: 'MultiplyNode',
+      node1: { nodeType: 'BinaryStringNode', value: '10' },
+      node2: { nodeType: 'BinaryStringNode', value: '1000' }
     },
-    node2: { nodeType: 'NumberNode', value: 17 }
+    node2: { nodeType: 'BinaryStringNode', value: '10000' }
   },
   node2: { nodeType: 'NumberNode', value: 2 }
 }
 
-Order of Evaluation
-((((81 # 2) ** 2) - 17) LB 2) => 6
+Evaluated Result
+5
 ```
