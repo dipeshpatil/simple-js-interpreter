@@ -105,7 +105,7 @@ class Parser {
                 result = {
                     nodeType: Node.POW,
                     node1: result,
-                    node2: this.factor(),
+                    node2: this.expr(),
                 };
             } else if (this.currentToken.TokenType === Token.NTHROOT) {
                 this.advance();
@@ -162,6 +162,18 @@ class Parser {
             return {
                 nodeType: Node.OCTAL_STRING,
                 value: value,
+            };
+        } else if (this.currentToken.TokenType === Token.E) {
+            this.advance();
+            return {
+                nodeType: Node.NUMBER,
+                value: Math.exp(1),
+            };
+        } else if (this.currentToken.TokenType === Token.PI) {
+            this.advance();
+            return {
+                nodeType: Node.NUMBER,
+                value: Math.PI,
             };
         } else if (this.currentToken.TokenType === Token.PLUS) {
             this.advance();

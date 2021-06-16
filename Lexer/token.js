@@ -22,6 +22,9 @@ const Token = {
     OCTAL: "Octal",
     HEXADECIMAL: "HexaDecimal",
 
+    E: "E",
+    PI: "PI",
+
     LPAREN: "LParen",
     RPAREN: "RParen",
 };

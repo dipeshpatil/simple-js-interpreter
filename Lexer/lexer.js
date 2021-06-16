@@ -75,18 +75,15 @@ class Lexer {
                     this.advance();
                     this.tokens.push(TokenType.NAT_LOG);
                 }
-            } else if (this.currentChar === STRING_CHAR) {
+            } else if (this.currentChar === Operator.BINARY_STRING) {
                 this.advance();
-                if (this.currentChar === Operator.BINARY_STRING) {
-                    this.advance();
-                    this.tokens.push(this.generateBinaryString());
-                } else if (this.currentChar === Operator.HEXADECIMAL_STRING) {
-                    this.advance();
-                    this.tokens.push(this.generateHexaDecimalString());
-                } else if (this.currentChar === Operator.OCTAL_STRING) {
-                    this.advance();
-                    this.tokens.push(this.generateOctalString());
-                }
+                this.tokens.push(this.generateBinaryString());
+            } else if (this.currentChar === Operator.HEXADECIMAL_STRING) {
+                this.advance();
+                this.tokens.push(this.generateHexaDecimalString());
+            } else if (this.currentChar === Operator.OCTAL_STRING) {
+                this.advance();
+                this.tokens.push(this.generateOctalString());
             } else if (this.currentChar === Operator.BINARY) {
                 this.advance();
                 this.tokens.push(TokenType.BINARY);
@@ -96,6 +93,15 @@ class Lexer {
             } else if (this.currentChar === Operator.OCTAL) {
                 this.advance();
                 this.tokens.push(TokenType.OCTAL);
+            } else if (this.currentChar === Operator.E) {
+                this.advance();
+                this.tokens.push(TokenType.E);
+            } else if (this.currentChar === Operator.P) {
+                this.advance();
+                if (this.currentChar === Operator.I) {
+                    this.advance();
+                    this.tokens.push(TokenType.PI);
+                }
             }
         }
 
@@ -107,15 +113,12 @@ class Lexer {
         this.advance();
 
         while (
-            (this.currentChar !== undefined ||
-                this.currentChar !== STRING_CHAR) &&
+            this.currentChar !== undefined &&
             OCTAL_DIGITS.includes(this.currentChar)
         ) {
             currentOctalString += this.currentChar;
             this.advance();
         }
-
-        this.advance();
 
         return {
             TokenType: Token.OCTAL_STRING,
@@ -124,19 +127,16 @@ class Lexer {
     }
 
     generateHexaDecimalString() {
-        var currentHexaDecimalString = this.currentChar.toUpperCase();
+        var currentHexaDecimalString = this.currentChar;
         this.advance();
 
         while (
-            (this.currentChar !== undefined ||
-                this.currentChar !== STRING_CHAR) &&
-            HEXADECIMAL_DIGITS.includes(this.currentChar.toUpperCase())
+            this.currentChar !== undefined &&
+            HEXADECIMAL_DIGITS.toLowerCase().includes(this.currentChar)
         ) {
             currentHexaDecimalString += this.currentChar;
             this.advance();
         }
-
-        this.advance();
 
         return {
             TokenType: Token.HEXADECIMAL_STRING,
@@ -149,15 +149,12 @@ class Lexer {
         this.advance();
 
         while (
-            (this.currentChar !== undefined ||
-                this.currentChar !== STRING_CHAR) &&
+            this.currentChar !== undefined &&
             BINARY_DIGITS.includes(this.currentChar)
         ) {
             currentBinaryString += this.currentChar;
             this.advance();
         }
-
-        this.advance();
 
         return {
             TokenType: Token.BINARY_STRING,

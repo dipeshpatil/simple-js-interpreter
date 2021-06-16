@@ -74,6 +74,14 @@ const TokenType = {
         TokenType: Token.OCTAL,
         TokenValue: Operator.OCTAL,
     },
+    E: {
+        TokenType: Token.NUMBER,
+        TokenValue: Math.exp(1),
+    },
+    PI: {
+        TokenType: Token.NUMBER,
+        TokenValue: Math.PI,
+    },
 };
 
 module.exports = TokenType;

@@ -17,6 +17,9 @@ const Operator = {
     OCTAL: "O",
     HEXADECIMAL_STRING: "h",
     HEXADECIMAL: "H",
+    E: "e",
+    P: "p",
+    I: "i",
 };
 
 module.exports = Operator;
