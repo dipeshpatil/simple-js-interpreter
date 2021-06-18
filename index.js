@@ -5,7 +5,7 @@ const Parser = require("./Parser/parser");
 const Evaluate = require("./Evaluator/evaluate");
 const Order = require("./Evaluator/order");
 
-const text = "B(b100 + b011 & b010 | b110)";
+const text = "habcd";
 
 const lexer = new Lexer(text);
 const tokens = lexer.generateTokens();
