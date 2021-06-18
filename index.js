@@ -5,7 +5,7 @@ const Parser = require("./Parser/parser");
 const Evaluate = require("./Evaluator/evaluate");
 const Order = require("./Evaluator/order");
 
-const text = "B(b100 + b011 & b010 | b110)";
+const text = "((((((1 + 2) * 3 + (4 / 2)) ** 2) + 7) LB 2) + 3) * pi";
 
 const lexer = new Lexer(text);
 const tokens = lexer.generateTokens();

@@ -18,9 +18,10 @@ const Operator = {
     HEXADECIMAL_STRING: "h",
     HEXADECIMAL: "H",
     E: "e",
-    P: "p",
-    I: "i",
-
+    PI: {
+        P: "p",
+        I: "i",
+    },
     // Bitwise Operators
     BITWISE_AND: "&",
     BITWISE_OR: "|",
