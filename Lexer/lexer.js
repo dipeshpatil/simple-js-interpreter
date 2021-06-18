@@ -91,6 +91,7 @@ class Lexer {
             // Multiply
             else if (this.currentChar === Operator.MULTIPLY) {
                 this.advance();
+                // Pow
                 if (this.currentChar === Operator.MULTIPLY) {
                     this.advance();
                     this.tokens.push(new Token(TT_POW, Operator.POW));
@@ -100,6 +101,7 @@ class Lexer {
             // Divide
             else if (this.currentChar === Operator.DIVIDE) {
                 this.advance();
+                // Integer Divide
                 if (this.currentChar === Operator.DIVIDE) {
                     this.advance();
                     this.tokens.push(
@@ -143,7 +145,7 @@ class Lexer {
                 this.advance();
                 this.tokens.push(this.generateString(Operator.HEXADECIMAL));
             }
-            // Ocatl String
+            // Octal String
             else if (this.currentChar === Operator.OCTAL_STRING) {
                 this.advance();
                 this.tokens.push(this.generateString(Operator.OCTAL));
@@ -216,7 +218,7 @@ class Lexer {
                 return;
         }
 
-        var currentString = this.currentChar;
+        let currentString = this.currentChar;
         this.advance();
 
         while (
@@ -236,8 +238,8 @@ class Lexer {
     }
 
     generateNumber() {
-        var decimalPointCount = 0;
-        var currentNumber = this.currentChar;
+        let decimalPointCount = 0;
+        let currentNumber = this.currentChar;
 
         this.advance();
 
@@ -257,7 +259,14 @@ class Lexer {
         if (currentNumber.startsWith(".")) currentNumber = "0" + currentNumber;
         if (currentNumber.endsWith(".")) currentNumber += "0";
 
-        return new Token(TT_NUMBER, parseFloat(currentNumber));
+        console.log(decimalPointCount + " " + currentNumber);
+
+        return new Token(
+            TT_NUMBER,
+            decimalPointCount === 0
+                ? parseInt(currentNumber)
+                : parseFloat(currentNumber)
+        );
     }
 }
 
