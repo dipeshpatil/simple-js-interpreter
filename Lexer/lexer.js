@@ -1,6 +1,8 @@
 const Operator = require("./operator");
 const _Token = require("./token");
 
+const TOKEN = require("./../constants/tokenType");
+
 const WHITESPACE = " \n\t";
 const DIGITS = "0123456789";
 const BINARY_DIGITS = "01";
@@ -8,9 +10,9 @@ const HEXADECIMAL_DIGITS = "0123456789ABCDEF";
 const OCTAL_DIGITS = "01234567";
 
 class Token {
-    constructor(TokenType, TokenValue = undefined) {
-        this.TokenType = TokenType;
-        this.TokenValue = TokenValue;
+    constructor(type, value = undefined) {
+        this.type = type;
+        this.value = value;
     }
 }
 
@@ -45,58 +47,58 @@ class Lexer {
                 this.tokens.push(this.generateNumber());
             }
             // Left Parenthesis
-            else if (this.currentChar === Operator.LPAREN) {
+            else if (this.currentChar === TOKEN.OPERATOR.LPAREN) {
                 this.advance();
-                this.tokens.push(new Token(_Token.LPAREN, Operator.LPAREN));
+                this.tokens.push(new Token(TOKEN.TYPE.LPAREN, TOKEN.OPERATOR.LPAREN));
             }
             // Right Parenthesis
-            else if (this.currentChar === Operator.RPAREN) {
+            else if (this.currentChar === TOKEN.OPERATOR.RPAREN) {
                 this.advance();
-                this.tokens.push(new Token(_Token.RPAREN, Operator.RPAREN));
+                this.tokens.push(new Token(TOKEN.TYPE.RPAREN, TOKEN.OPERATOR.RPAREN));
             }
             // Plus
-            else if (this.currentChar === Operator.PLUS) {
+            else if (this.currentChar === TOKEN.OPERATOR.PLUS) {
                 this.advance();
-                this.tokens.push(new Token(_Token.PLUS, Operator.PLUS));
+                this.tokens.push(new Token(TOKEN.TYPE.PLUS, TOKEN.OPERATOR.PLUS));
             }
             // Minus
-            else if (this.currentChar === Operator.MINUS) {
+            else if (this.currentChar === TOKEN.OPERATOR.MINUS) {
                 this.advance();
-                this.tokens.push(new Token(_Token.MINUS, Operator.MINUS));
+                this.tokens.push(new Token(TOKEN.TYPE.MINUS, TOKEN.OPERATOR.MINUS));
             }
             // Multiply
-            else if (this.currentChar === Operator.MULTIPLY) {
+            else if (this.currentChar === TOKEN.OPERATOR.MULTIPLY) {
                 this.advance();
                 // Pow
-                if (this.currentChar === Operator.MULTIPLY) {
+                if (this.currentChar === TOKEN.OPERATOR.MULTIPLY) {
                     this.advance();
-                    this.tokens.push(new Token(_Token.POW, Operator.POW));
+                    this.tokens.push(new Token(TOKEN.TYPE.POW, TOKEN.OPERATOR.POW));
                 } else
                     this.tokens.push(
-                        new Token(_Token.MULTIPLY, Operator.MULTIPLY)
+                        new Token(TOKEN.TYPE.MULTIPLY, TOKEN.OPERATOR.MULTIPLY)
                     );
             }
             // Divide
-            else if (this.currentChar === Operator.DIVIDE) {
+            else if (this.currentChar === TOKEN.OPERATOR.DIVIDE) {
                 this.advance();
-                // Integer Divide
-                if (this.currentChar === Operator.DIVIDE) {
+                // Pow
+                if (this.currentChar === TOKEN.OPERATOR.DIVIDE) {
                     this.advance();
-                    this.tokens.push(
-                        new Token(_Token.INT_DIVIDE, Operator.INT_DIVIDE)
-                    );
+                    this.tokens.push(new Token(TOKEN.TYPE.INT_DIVIDE, TOKEN.OPERATOR.INT_DIVIDE));
                 } else
-                    this.tokens.push(new Token(_Token.DIVIDE, Operator.DIVIDE));
+                    this.tokens.push(
+                        new Token(TOKEN.TYPE.DIVIDE, TOKEN.OPERATOR.DIVIDE)
+                    );
             }
             // Mod
-            else if (this.currentChar === Operator.MOD) {
+            else if (this.currentChar === TOKEN.OPERATOR.MOD) {
                 this.advance();
-                this.tokens.push(new Token(_Token.MOD, Operator.MOD));
+                this.tokens.push(new Token(TOKEN.TYPE.MOD, TOKEN.OPERATOR.MOD));
             }
             // Nth Root
-            else if (this.currentChar === Operator.NTHROOT) {
+            else if (this.currentChar === TOKEN.OPERATOR.NTH_ROOT) {
                 this.advance();
-                this.tokens.push(new Token(_Token.NTHROOT, Operator.NTHROOT));
+                this.tokens.push(new Token(TOKEN.TYPE.NTH_ROOT, TOKEN.OPERATOR.NTH_ROOT));
             }
             // Logarithm
             else if (this.currentChar === "L") {
@@ -105,14 +107,14 @@ class Lexer {
                 if (this.currentChar === "B") {
                     this.advance();
                     this.tokens.push(
-                        new Token(_Token.LOGNBASEX, Operator.LOGNBASEX)
+                        new Token(TOKEN.TYPE.LOGNBASEX, TOKEN.OPERATOR.LOGNBASEX)
                     );
                 }
                 // Natural Log
                 else if (this.currentChar === "N") {
                     this.advance();
                     this.tokens.push(
-                        new Token(_Token.NAT_LOG, Operator.NAT_LOG)
+                        new Token(TOKEN.TYPE.NAT_LOG, TOKEN.OPERATOR.NAT_LOG)
                     );
                 }
             }
@@ -243,7 +245,7 @@ class Lexer {
         if (currentNumber.endsWith(".")) currentNumber += "0";
 
         return new Token(
-            _Token.NUMBER,
+            TOKEN.TYPE.NUMBER,
             decimalPointCount === 0
                 ? parseInt(currentNumber)
                 : parseFloat(currentNumber)

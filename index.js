@@ -6,7 +6,7 @@ const Evaluate = require("./Evaluator/evaluate");
 const Order = require("./Evaluator/order");
 
 // const text = "((((((1 + 2) * 3 + (4 / 2)) ** 2) + 7) LB 2) + 3) * pi";
-const text = "8 ** 2 * 8";
+const text = "(2 + 3 * 6 + 12) LB 2";
 
 const lexer = new Lexer(text);
 const tokens = lexer.generateTokens();
