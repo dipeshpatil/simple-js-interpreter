@@ -1,7 +1,5 @@
-const Token = require("../Lexer/token");
-const Node = require("./nodes");
-
 const TOKEN = require("../constants/tokenType")
+const NODE = require("../constants/nodeType")
 
 class Parser {
     constructor(tokens) {
@@ -42,14 +40,14 @@ class Parser {
             if (this.currentToken.type === TOKEN.TYPE.PLUS) {
                 this.advance();
                 result = {
-                    nodeType: Node.ADD,
+                    nodeType: NODE.TYPE.ADD,
                     node1: result,
                     node2: this.term(),
                 };
             } else if (this.currentToken.type === TOKEN.TYPE.MINUS) {
                 this.advance();
                 result = {
-                    nodeType: Node.SUB,
+                    nodeType: NODE.TYPE.SUB,
                     node1: result,
                     node2: this.term(),
                 };
@@ -79,63 +77,63 @@ class Parser {
             if (this.currentToken.type === TOKEN.TYPE.MULTIPLY) {
                 this.advance();
                 result = {
-                    nodeType: Node.MUL,
+                    nodeType: NODE.TYPE.MULTIPLY,
                     node1: result,
                     node2: this.factor(),
                 };
             } else if (this.currentToken.type === TOKEN.TYPE.DIVIDE) {
                 this.advance();
                 result = {
-                    nodeType: Node.DIV,
+                    nodeType: NODE.TYPE.DIVIDE,
                     node1: result,
                     node2: this.factor(),
                 };
             } else if (this.currentToken.type === TOKEN.TYPE.MOD) {
                 this.advance();
                 result = {
-                    nodeType: Node.MOD,
+                    nodeType: NODE.TYPE.MOD,
                     node1: result,
                     node2: this.factor(),
                 };
             } else if (this.currentToken.type === TOKEN.TYPE.INT_DIVIDE) {
                 this.advance();
                 result = {
-                    nodeType: Node.INT_DIVIDE,
+                    nodeType: NODE.TYPE.INT_DIVIDE,
                     node1: result,
                     node2: this.factor(),
                 };
             } else if (this.currentToken.type === TOKEN.TYPE.POW) {
                 this.advance();
                 result = {
-                    nodeType: Node.POW,
+                    nodeType: NODE.TYPE.POW,
                     node1: result,
                     node2: this.expr(),
                 };
             } else if (this.currentToken.type === TOKEN.TYPE.NTH_ROOT) {
                 this.advance();
                 result = {
-                    nodeType: Node.NTHROOT,
+                    nodeType: NODE.TYPE.NTH_ROOT,
                     node1: result,
                     node2: this.factor(),
                 };
             } else if (this.currentToken.type === TOKEN.TYPE.LOGNBASEX) {
                 this.advance();
                 result = {
-                    nodeType: Node.LOGNBASEX,
+                    nodeType: NODE.TYPE.LOGNBASEX,
                     node1: result,
                     node2: this.factor(),
                 };
             } else if (this.currentToken.type === TOKEN.TYPE.BITWISE_AND) {
                 this.advance();
                 result = {
-                    nodeType: Node.BITWISE_AND,
+                    nodeType: NODE.TYPE.BITWISE_AND,
                     node1: result,
                     node2: this.factor(),
                 };
             } else if (this.currentToken.type === TOKEN.TYPE.BITWISE_OR) {
                 this.advance();
                 result = {
-                    nodeType: Node.BITWISE_OR,
+                    nodeType: NODE.TYPE.BITWISE_OR,
                     node1: result,
                     node2: this.factor(),
                 };
@@ -157,76 +155,64 @@ class Parser {
             let value = this.currentToken.value;
             this.advance();
             return {
-                nodeType: Node.NUMBER,
+                nodeType: NODE.TYPE.NUMBER,
                 value: value,
             };
         } else if (this.currentToken.type === TOKEN.TYPE.BINARY_STRING) {
             let value = this.currentToken.value;
             this.advance();
             return {
-                nodeType: Node.BINARY_STRING,
+                nodeType: NODE.TYPE.BINARY_STRING,
                 value: value,
             };
         } else if (this.currentToken.type === TOKEN.TYPE.HEXADECIMAL_STRING) {
             let value = this.currentToken.value;
             this.advance();
             return {
-                nodeType: Node.HEXADECIMAL_STRING,
+                nodeType: NODE.TYPE.HEXADECIMAL_STRING,
                 value: value,
             };
         } else if (this.currentToken.type === TOKEN.TYPE.OCTAL_STRING) {
             let value = this.currentToken.value;
             this.advance();
             return {
-                nodeType: Node.OCTAL_STRING,
+                nodeType: NODE.TYPE.OCTAL_STRING,
                 value: value,
             };
-        } else if (this.currentToken.TokenType === Token.E) {
+        } else if (this.currentToken.type === TOKEN.TYPE.PLUS) {
             this.advance();
             return {
-                nodeType: Node.NUMBER,
-                value: Math.exp(1),
-            };
-        } else if (this.currentToken.TokenType === Token.PI) {
-            this.advance();
-            return {
-                nodeType: Node.NUMBER,
-                value: Math.PI,
-            };
-        } else if (this.currentToken.TokenType === Token.PLUS) {
-            this.advance();
-            return {
-                nodeType: Node.PLUS,
+                nodeType: NODE.TYPE.PLUS,
                 node: this.factor(),
             };
-        } else if (this.currentToken.TokenType === Token.MINUS) {
+        } else if (this.currentToken.type === TOKEN.TYPE.MINUS) {
             this.advance();
             return {
-                nodeType: Node.MINUS,
+                nodeType: NODE.TYPE.MINUS,
                 node: this.factor(),
             };
         } else if (this.currentToken.type === TOKEN.TYPE.NAT_LOG) {
             this.advance();
             return {
-                nodeType: Node.NAT_LOG,
+                nodeType: NODE.TYPE.NAT_LOG,
                 node: this.factor(),
             };
         } else if (this.currentToken.type === TOKEN.TYPE.BINARY) {
             this.advance();
             return {
-                nodeType: Node.BINARY,
+                nodeType: NODE.TYPE.BINARY,
                 node: this.factor(),
             };
         } else if (this.currentToken.type === TOKEN.TYPE.HEXADECIMAL) {
             this.advance();
             return {
-                nodeType: Node.HEXADECIMAL,
+                nodeType: NODE.TYPE.HEXADECIMAL,
                 node: this.factor(),
             };
         } else if (this.currentToken.type === TOKEN.TYPE.OCTAL) {
             this.advance();
             return {
-                nodeType: Node.OCTAL,
+                nodeType: NODE.TYPE.OCTAL,
                 node: this.factor(),
             };
         }

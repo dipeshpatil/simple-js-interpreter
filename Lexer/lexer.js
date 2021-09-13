@@ -1,6 +1,3 @@
-const Operator = require("./operator");
-const _Token = require("./token");
-
 const TOKEN = require("./../constants/tokenType");
 
 const WHITESPACE = " \n\t";
@@ -149,16 +146,16 @@ class Lexer {
                 this.tokens.push(new Token(TOKEN.TYPE.OCTAL, TOKEN.OPERATOR.OCTAL));
             }
             // Constant E
-            else if (this.currentChar === Operator.E) {
+            else if (this.currentChar === TOKEN.OPERATOR.E) {
                 this.advance();
-                this.tokens.push(new Token(_Token.E, Math.exp(1)));
+                this.tokens.push(new Token(TOKEN.TYPE.NUMBER, Math.exp(1)));
             }
             // Constant PI
-            else if (this.currentChar === Operator.PI.P) {
+            else if (this.currentChar === "p") {
                 this.advance();
-                if (this.currentChar === Operator.PI.I) {
+                if (this.currentChar === "i") {
                     this.advance();
-                    this.tokens.push(new Token(_Token.PI, Math.PI));
+                    this.tokens.push(new Token(TOKEN.TYPE.NUMBER, Math.PI));
                 }
             }
             // Bitwise AND
@@ -214,7 +211,7 @@ class Lexer {
 
         return new Token(
             targetTokenType,
-            TYPE === Operator.HEXADECIMAL
+            TYPE === TOKEN.OPERATOR.HEXADECIMAL
                 ? currentString.toUpperCase()
                 : currentString
         );

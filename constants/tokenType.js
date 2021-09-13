@@ -27,7 +27,7 @@ const TOKEN = {
 
     BINARY: "TT_BINARY",
     HEXADECIMAL: "TT_HEXADECIMAL",
-    OCTAL: "TT_OCTAL"
+    OCTAL: "TT_OCTAL",
   },
 
   OPERATOR: {
@@ -56,7 +56,10 @@ const TOKEN = {
 
     BINARY: "B",
     HEXADECIMAL: "H",
-    OCTAL: "O"
+    OCTAL: "O",
+
+    E: "e",
+    PI: "pi"
   }
 };
 

@@ -1,85 +1,78 @@
 ```js
 Expression
-((((((1 + 2) * 3 + (4 / 2)) ** 2) + 7) LB 2) + 3) * pi
+((((((1 + 2) * 3 + (4 / 2)) ** 2) + 7) LB 2) + 3) * e * pi
 
 Tokens
-[
-  { TokenType: 'LParen', TokenValue: '(' },
-  { TokenType: 'LParen', TokenValue: '(' },
-  { TokenType: 'LParen', TokenValue: '(' },
-  { TokenType: 'LParen', TokenValue: '(' },
-  { TokenType: 'LParen', TokenValue: '(' },
-  { TokenType: 'LParen', TokenValue: '(' },
-  { TokenType: 'Number', TokenValue: 1 },
-  { TokenType: 'Plus', TokenValue: '+' },
-  { TokenType: 'Number', TokenValue: 2 },
-  { TokenType: 'RParen', TokenValue: ')' },
-  { TokenType: 'Multiply', TokenValue: '*' },
-  { TokenType: 'Number', TokenValue: 3 },
-  { TokenType: 'Plus', TokenValue: '+' },
-  { TokenType: 'LParen', TokenValue: '(' },
-  { TokenType: 'Number', TokenValue: 4 },
-  { TokenType: 'Divide', TokenValue: '/' },
-  { TokenType: 'Number', TokenValue: 2 },
-  { TokenType: 'RParen', TokenValue: ')' },
-  { TokenType: 'RParen', TokenValue: ')' },
-  { TokenType: 'Pow', TokenValue: '**' },
-  { TokenType: 'Number', TokenValue: 2 },
-  { TokenType: 'RParen', TokenValue: ')' },
-  { TokenType: 'Plus', TokenValue: '+' },
-  { TokenType: 'Number', TokenValue: 7 },
-  { TokenType: 'RParen', TokenValue: ')' },
-  { TokenType: 'LogNBaseX', TokenValue: 'LB' },
-  { TokenType: 'Number', TokenValue: 2 },
-  { TokenType: 'RParen', TokenValue: ')' },
-  { TokenType: 'Plus', TokenValue: '+' },
-  { TokenType: 'Number', TokenValue: 3 },
-  { TokenType: 'RParen', TokenValue: ')' },
-  { TokenType: 'Multiply', TokenValue: '*' },
-  { TokenType: 'Number', TokenValue: 3.141592653589793 }
-]
+[ Token { type: 'TT_LPAREN', value: '(' },
+  Token { type: 'TT_LPAREN', value: '(' },
+  Token { type: 'TT_LPAREN', value: '(' },
+  Token { type: 'TT_LPAREN', value: '(' },
+  Token { type: 'TT_LPAREN', value: '(' },
+  Token { type: 'TT_LPAREN', value: '(' },
+  Token { type: 'TT_NUMBER', value: 1 },
+  Token { type: 'TT_PLUS', value: '+' },
+  Token { type: 'TT_NUMBER', value: 2 },
+  Token { type: 'TT_RPAREN', value: ')' },
+  Token { type: 'TT_MULTIPLY', value: '*' },
+  Token { type: 'TT_NUMBER', value: 3 },
+  Token { type: 'TT_PLUS', value: '+' },
+  Token { type: 'TT_LPAREN', value: '(' },
+  Token { type: 'TT_NUMBER', value: 4 },
+  Token { type: 'TT_DIVIDE', value: '/' },
+  Token { type: 'TT_NUMBER', value: 2 },
+  Token { type: 'TT_RPAREN', value: ')' },
+  Token { type: 'TT_RPAREN', value: ')' },
+  Token { type: 'TT_POW', value: '**' },
+  Token { type: 'TT_NUMBER', value: 2 },
+  Token { type: 'TT_RPAREN', value: ')' },
+  Token { type: 'TT_PLUS', value: '+' },
+  Token { type: 'TT_NUMBER', value: 7 },
+  Token { type: 'TT_RPAREN', value: ')' },
+  Token { type: 'TT_LOG_BASE', value: 'LB' },
+  Token { type: 'TT_NUMBER', value: 2 },
+  Token { type: 'TT_RPAREN', value: ')' },
+  Token { type: 'TT_PLUS', value: '+' },
+  Token { type: 'TT_NUMBER', value: 3 },
+  Token { type: 'TT_RPAREN', value: ')' },
+  Token { type: 'TT_MULTIPLY', value: '*' },
+  Token { type: 'TT_NUMBER', value: 2.718281828459045 },
+  Token { type: 'TT_MULTIPLY', value: '*' },
+  Token { type: 'TT_NUMBER', value: 3.141592653589793 } ]
 
 Tree
-{
-  nodeType: 'MultiplyNode',
-  node1: {
-    nodeType: 'AddNode',
-    node1: {
-      nodeType: 'LogNBaseXNode',
-      node1: {
-        nodeType: 'AddNode',
-        node1: {
-          nodeType: 'PowNode',
-          node1: {
-            nodeType: 'AddNode',
-            node1: {
-              nodeType: 'MultiplyNode',
-              node1: {
-                nodeType: 'AddNode',
-                node1: { nodeType: 'NumberNode', value: 1 },
-                node2: { nodeType: 'NumberNode', value: 2 }
-              },
-              node2: { nodeType: 'NumberNode', value: 3 }
-            },
-            node2: {
-              nodeType: 'DivideNode',
-              node1: { nodeType: 'NumberNode', value: 4 },
-              node2: { nodeType: 'NumberNode', value: 2 }
-            }
-          },
-          node2: { nodeType: 'NumberNode', value: 2 }
-        },
-        node2: { nodeType: 'NumberNode', value: 7 }
-      },
-      node2: { nodeType: 'NumberNode', value: 2 }
-    },
-    node2: { nodeType: 'NumberNode', value: 3 }
-  },
-  node2: { nodeType: 'NumberNode', value: 3.141592653589793 }
-}
+{ nodeType: 'NT_MULIPLY',
+  node1:
+   { nodeType: 'NT_MULIPLY',
+     node1:
+      { nodeType: 'NT_ADD',
+        node1:
+         { nodeType: 'NT_LOG_BASE',
+           node1:
+            { nodeType: 'NT_ADD',
+              node1:
+               { nodeType: 'NT_POW',
+                 node1:
+                  { nodeType: 'NT_ADD',
+                    node1:
+                     { nodeType: 'NT_MULIPLY',
+                       node1:
+                        { nodeType: 'NT_ADD',
+                          node1: { nodeType: 'NT_NUMBER', value: 1 },
+                          node2: { nodeType: 'NT_NUMBER', value: 2 } },
+                       node2: { nodeType: 'NT_NUMBER', value: 3 } },
+                    node2:
+                     { nodeType: 'NT_DIVIDE',
+                       node1: { nodeType: 'NT_NUMBER', value: 4 },
+                       node2: { nodeType: 'NT_NUMBER', value: 2 } } },
+                 node2: { nodeType: 'NT_NUMBER', value: 2 } },
+              node2: { nodeType: 'NT_NUMBER', value: 7 } },
+           node2: { nodeType: 'NT_NUMBER', value: 2 } },
+        node2: { nodeType: 'NT_NUMBER', value: 3 } },
+     node2: { nodeType: 'NT_NUMBER', value: 2.718281828459045 } },
+  node2: { nodeType: 'NT_NUMBER', value: 3.141592653589793 } }
 
-Order Of Evaluation => ((((((((1 + 2) * 3) + (4 / 2)) ** 2) + 7) LB 2) + 3) * 3.141592653589793)
+Order Of Evaluation => (((((((((1 + 2) * 3) + (4 / 2)) ** 2) + 7) LB 2) + 3) * 2.718281828459045) * 3.141592653589793)
 
 Evaluated Result
-31.41592653589793
+85.39734222673566
 ```
