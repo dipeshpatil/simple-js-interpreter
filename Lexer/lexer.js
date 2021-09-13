@@ -1,16 +1,15 @@
-const Operator = require("./operator");
-const _Token = require("./token");
+const TOKEN = require("./../constants/tokenType");
 
 const WHITESPACE = " \n\t";
 const DIGITS = "0123456789";
 const BINARY_DIGITS = "01";
-const HEXADECIMAL_DIGITS = "0123456789ABCDEF";
+const HEXADECIMAL_DIGITS = DIGITS + "ABCDEF";
 const OCTAL_DIGITS = "01234567";
 
 class Token {
-    constructor(TokenType, TokenValue = undefined) {
-        this.TokenType = TokenType;
-        this.TokenValue = TokenValue;
+    constructor(type, value = undefined) {
+        this.type = type;
+        this.value = value;
     }
 }
 
@@ -45,58 +44,58 @@ class Lexer {
                 this.tokens.push(this.generateNumber());
             }
             // Left Parenthesis
-            else if (this.currentChar === Operator.LPAREN) {
+            else if (this.currentChar === TOKEN.OPERATOR.LPAREN) {
                 this.advance();
-                this.tokens.push(new Token(_Token.LPAREN, Operator.LPAREN));
+                this.tokens.push(new Token(TOKEN.TYPE.LPAREN, TOKEN.OPERATOR.LPAREN));
             }
             // Right Parenthesis
-            else if (this.currentChar === Operator.RPAREN) {
+            else if (this.currentChar === TOKEN.OPERATOR.RPAREN) {
                 this.advance();
-                this.tokens.push(new Token(_Token.RPAREN, Operator.RPAREN));
+                this.tokens.push(new Token(TOKEN.TYPE.RPAREN, TOKEN.OPERATOR.RPAREN));
             }
             // Plus
-            else if (this.currentChar === Operator.PLUS) {
+            else if (this.currentChar === TOKEN.OPERATOR.PLUS) {
                 this.advance();
-                this.tokens.push(new Token(_Token.PLUS, Operator.PLUS));
+                this.tokens.push(new Token(TOKEN.TYPE.PLUS, TOKEN.OPERATOR.PLUS));
             }
             // Minus
-            else if (this.currentChar === Operator.MINUS) {
+            else if (this.currentChar === TOKEN.OPERATOR.MINUS) {
                 this.advance();
-                this.tokens.push(new Token(_Token.MINUS, Operator.MINUS));
+                this.tokens.push(new Token(TOKEN.TYPE.MINUS, TOKEN.OPERATOR.MINUS));
             }
             // Multiply
-            else if (this.currentChar === Operator.MULTIPLY) {
+            else if (this.currentChar === TOKEN.OPERATOR.MULTIPLY) {
                 this.advance();
                 // Pow
-                if (this.currentChar === Operator.MULTIPLY) {
+                if (this.currentChar === TOKEN.OPERATOR.MULTIPLY) {
                     this.advance();
-                    this.tokens.push(new Token(_Token.POW, Operator.POW));
+                    this.tokens.push(new Token(TOKEN.TYPE.POW, TOKEN.OPERATOR.POW));
                 } else
                     this.tokens.push(
-                        new Token(_Token.MULTIPLY, Operator.MULTIPLY)
+                        new Token(TOKEN.TYPE.MULTIPLY, TOKEN.OPERATOR.MULTIPLY)
                     );
             }
             // Divide
-            else if (this.currentChar === Operator.DIVIDE) {
+            else if (this.currentChar === TOKEN.OPERATOR.DIVIDE) {
                 this.advance();
-                // Integer Divide
-                if (this.currentChar === Operator.DIVIDE) {
+                // Pow
+                if (this.currentChar === TOKEN.OPERATOR.DIVIDE) {
                     this.advance();
-                    this.tokens.push(
-                        new Token(_Token.INT_DIVIDE, Operator.INT_DIVIDE)
-                    );
+                    this.tokens.push(new Token(TOKEN.TYPE.INT_DIVIDE, TOKEN.OPERATOR.INT_DIVIDE));
                 } else
-                    this.tokens.push(new Token(_Token.DIVIDE, Operator.DIVIDE));
+                    this.tokens.push(
+                        new Token(TOKEN.TYPE.DIVIDE, TOKEN.OPERATOR.DIVIDE)
+                    );
             }
             // Mod
-            else if (this.currentChar === Operator.MOD) {
+            else if (this.currentChar === TOKEN.OPERATOR.MOD) {
                 this.advance();
-                this.tokens.push(new Token(_Token.MOD, Operator.MOD));
+                this.tokens.push(new Token(TOKEN.TYPE.MOD, TOKEN.OPERATOR.MOD));
             }
             // Nth Root
-            else if (this.currentChar === Operator.NTHROOT) {
+            else if (this.currentChar === TOKEN.OPERATOR.NTH_ROOT) {
                 this.advance();
-                this.tokens.push(new Token(_Token.NTHROOT, Operator.NTHROOT));
+                this.tokens.push(new Token(TOKEN.TYPE.NTH_ROOT, TOKEN.OPERATOR.NTH_ROOT));
             }
             // Logarithm
             else if (this.currentChar === "L") {
@@ -105,74 +104,72 @@ class Lexer {
                 if (this.currentChar === "B") {
                     this.advance();
                     this.tokens.push(
-                        new Token(_Token.LOGNBASEX, Operator.LOGNBASEX)
+                        new Token(TOKEN.TYPE.LOGNBASEX, TOKEN.OPERATOR.LOGNBASEX)
                     );
                 }
                 // Natural Log
                 else if (this.currentChar === "N") {
                     this.advance();
                     this.tokens.push(
-                        new Token(_Token.NAT_LOG, Operator.NAT_LOG)
+                        new Token(TOKEN.TYPE.NAT_LOG, TOKEN.OPERATOR.NAT_LOG)
                     );
                 }
             }
             // Binary String
-            else if (this.currentChar === Operator.BINARY_STRING) {
+            else if (this.currentChar === TOKEN.OPERATOR.BINARY_STRING) {
                 this.advance();
-                this.tokens.push(this.generateString(Operator.BINARY));
+                this.tokens.push(this.generateString(TOKEN.OPERATOR.BINARY_STRING));
             }
             // HexaDecimal String
-            else if (this.currentChar === Operator.HEXADECIMAL_STRING) {
+            else if (this.currentChar === TOKEN.OPERATOR.HEXADECIMAL_STRING) {
                 this.advance();
-                this.tokens.push(this.generateString(Operator.HEXADECIMAL));
+                this.tokens.push(this.generateString(TOKEN.OPERATOR.HEXADECIMAL_STRING));
             }
             // Octal String
-            else if (this.currentChar === Operator.OCTAL_STRING) {
+            else if (this.currentChar === TOKEN.OPERATOR.OCTAL_STRING) {
                 this.advance();
-                this.tokens.push(this.generateString(Operator.OCTAL));
+                this.tokens.push(this.generateString(TOKEN.OPERATOR.OCTAL_STRING));
             }
             // Binary Conversion
-            else if (this.currentChar === Operator.BINARY) {
+            else if (this.currentChar === TOKEN.OPERATOR.BINARY) {
                 this.advance();
-                this.tokens.push(new Token(_Token.BINARY, Operator.BINARY));
+                this.tokens.push(new Token(TOKEN.TYPE.BINARY, TOKEN.OPERATOR.BINARY));
             }
             // HexaDecimal Conversion
-            else if (this.currentChar === Operator.HEXADECIMAL) {
+            else if (this.currentChar === TOKEN.OPERATOR.HEXADECIMAL) {
                 this.advance();
-                this.tokens.push(
-                    new Token(_Token.HEXADECIMAL, Operator.HEXADECIMAL)
-                );
+                this.tokens.push(new Token(TOKEN.TYPE.HEXADECIMAL, TOKEN.OPERATOR.HEXADECIMAL));
             }
             // Octal Conversion
-            else if (this.currentChar === Operator.OCTAL) {
+            else if (this.currentChar === TOKEN.OPERATOR.OCTAL) {
                 this.advance();
-                this.tokens.push(new Token(_Token.OCTAL, Operator.OCTAL));
+                this.tokens.push(new Token(TOKEN.TYPE.OCTAL, TOKEN.OPERATOR.OCTAL));
             }
             // Constant E
-            else if (this.currentChar === Operator.E) {
+            else if (this.currentChar === TOKEN.OPERATOR.E) {
                 this.advance();
-                this.tokens.push(new Token(_Token.E, Math.exp(1)));
+                this.tokens.push(new Token(TOKEN.TYPE.NUMBER, Math.exp(1)));
             }
             // Constant PI
-            else if (this.currentChar === Operator.PI.P) {
+            else if (this.currentChar === "p") {
                 this.advance();
-                if (this.currentChar === Operator.PI.I) {
+                if (this.currentChar === "i") {
                     this.advance();
-                    this.tokens.push(new Token(_Token.PI, Math.PI));
+                    this.tokens.push(new Token(TOKEN.TYPE.NUMBER, Math.PI));
                 }
             }
             // Bitwise AND
-            else if (this.currentChar === Operator.BITWISE_AND) {
+            else if (this.currentChar === TOKEN.OPERATOR.BITWISE_AND) {
                 this.advance();
                 this.tokens.push(
-                    new Token(_Token.BITWISE_AND, Operator.BITWISE_AND)
+                    new Token(TOKEN.TYPE.BITWISE_AND, TOKEN.OPERATOR.BITWISE_AND)
                 );
             }
             // Bitwise OR
-            else if (this.currentChar === Operator.BITWISE_OR) {
+            else if (this.currentChar === TOKEN.OPERATOR.BITWISE_OR) {
                 this.advance();
                 this.tokens.push(
-                    new Token(_Token.BITWISE_OR, Operator.BITWISE_OR)
+                    new Token(TOKEN.TYPE.BITWISE_OR, TOKEN.OPERATOR.BITWISE_OR)
                 );
             }
         }
@@ -185,17 +182,17 @@ class Lexer {
         let targetTokenType = "";
 
         switch (TYPE) {
-            case Operator.BINARY:
+            case TOKEN.OPERATOR.BINARY_STRING:
                 ACCEPTED_CHARS = BINARY_DIGITS;
-                targetTokenType = _Token.BINARY_STRING;
+                targetTokenType = TOKEN.TYPE.BINARY_STRING;
                 break;
-            case Operator.HEXADECIMAL:
+            case TOKEN.OPERATOR.HEXADECIMAL_STRING:
                 ACCEPTED_CHARS = HEXADECIMAL_DIGITS.toLowerCase();
-                targetTokenType = _Token.HEXADECIMAL_STRING;
+                targetTokenType = TOKEN.TYPE.HEXADECIMAL_STRING;
                 break;
-            case Operator.OCTAL:
+            case TOKEN.OPERATOR.OCTAL_STRING:
                 ACCEPTED_CHARS = OCTAL_DIGITS;
-                targetTokenType = _Token.OCTAL_STRING;
+                targetTokenType = TOKEN.TYPE.OCTAL_STRING;
                 break;
             default:
                 return;
@@ -214,7 +211,7 @@ class Lexer {
 
         return new Token(
             targetTokenType,
-            TYPE === Operator.HEXADECIMAL
+            TYPE === TOKEN.OPERATOR.HEXADECIMAL
                 ? currentString.toUpperCase()
                 : currentString
         );
@@ -243,7 +240,7 @@ class Lexer {
         if (currentNumber.endsWith(".")) currentNumber += "0";
 
         return new Token(
-            _Token.NUMBER,
+            TOKEN.TYPE.NUMBER,
             decimalPointCount === 0
                 ? parseInt(currentNumber)
                 : parseFloat(currentNumber)
