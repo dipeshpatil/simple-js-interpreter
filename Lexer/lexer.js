@@ -6,7 +6,7 @@ const TOKEN = require("./../constants/tokenType");
 const WHITESPACE = " \n\t";
 const DIGITS = "0123456789";
 const BINARY_DIGITS = "01";
-const HEXADECIMAL_DIGITS = "0123456789ABCDEF";
+const HEXADECIMAL_DIGITS = DIGITS + "ABCDEF";
 const OCTAL_DIGITS = "01234567";
 
 class Token {
@@ -164,17 +164,17 @@ class Lexer {
                 }
             }
             // Bitwise AND
-            else if (this.currentChar === Operator.BITWISE_AND) {
+            else if (this.currentChar === TOKEN.OPERATOR.BITWISE_AND) {
                 this.advance();
                 this.tokens.push(
-                    new Token(_Token.BITWISE_AND, Operator.BITWISE_AND)
+                    new Token(TOKEN.TYPE.BITWISE_AND, TOKEN.OPERATOR.BITWISE_AND)
                 );
             }
             // Bitwise OR
-            else if (this.currentChar === Operator.BITWISE_OR) {
+            else if (this.currentChar === TOKEN.OPERATOR.BITWISE_OR) {
                 this.advance();
                 this.tokens.push(
-                    new Token(_Token.BITWISE_OR, Operator.BITWISE_OR)
+                    new Token(TOKEN.TYPE.BITWISE_OR, TOKEN.OPERATOR.BITWISE_OR)
                 );
             }
         }
