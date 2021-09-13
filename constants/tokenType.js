@@ -20,6 +20,14 @@ const TOKEN = {
     
     BITWISE_AND: "TT_BITWISE_AND",
     BITWISE_OR: "TT_BITWISE_OR",
+
+    BINARY_STRING: "TT_BINARY_STRING",
+    HEXADECIMAL_STRING: "TT_HEXADECIMAL_STRING",
+    OCTAL_STRING: "TT_OCTAL_STRING",
+
+    BINARY: "TT_BINARY",
+    HEXADECIMAL: "TT_HEXADECIMAL",
+    OCTAL: "TT_OCTAL"
   },
 
   OPERATOR: {
@@ -41,6 +49,14 @@ const TOKEN = {
     
     BITWISE_AND: "&",
     BITWISE_OR: "|",
+
+    BINARY_STRING: "b",
+    HEXADECIMAL_STRING: "h",
+    OCTAL_STRING: "o",
+
+    BINARY: "B",
+    HEXADECIMAL: "H",
+    OCTAL: "O"
   }
 };
 

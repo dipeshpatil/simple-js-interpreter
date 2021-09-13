@@ -5,8 +5,8 @@ const Parser = require("./Parser/parser");
 const Evaluate = require("./Evaluator/evaluate");
 const Order = require("./Evaluator/order");
 
-// const text = "((((((1 + 2) * 3 + (4 / 2)) ** 2) + 7) LB 2) + 3) * pi";
-const text = "LN (((((((1 + 3) - 2) // 0.6) + 7) % 6) * 8) LB 2)";
+const text = "B((((((1 + 2) * 3 + (4 / 2)) ** 2) + 7) LB 2) + 3)";
+// const text = "O(b100 + b100)";
 
 const lexer = new Lexer(text);
 const tokens = lexer.generateTokens();

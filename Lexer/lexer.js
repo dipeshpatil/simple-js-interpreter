@@ -119,36 +119,34 @@ class Lexer {
                 }
             }
             // Binary String
-            else if (this.currentChar === Operator.BINARY_STRING) {
+            else if (this.currentChar === TOKEN.OPERATOR.BINARY_STRING) {
                 this.advance();
-                this.tokens.push(this.generateString(Operator.BINARY));
+                this.tokens.push(this.generateString(TOKEN.OPERATOR.BINARY_STRING));
             }
             // HexaDecimal String
-            else if (this.currentChar === Operator.HEXADECIMAL_STRING) {
+            else if (this.currentChar === TOKEN.OPERATOR.HEXADECIMAL_STRING) {
                 this.advance();
-                this.tokens.push(this.generateString(Operator.HEXADECIMAL));
+                this.tokens.push(this.generateString(TOKEN.OPERATOR.HEXADECIMAL_STRING));
             }
             // Octal String
-            else if (this.currentChar === Operator.OCTAL_STRING) {
+            else if (this.currentChar === TOKEN.OPERATOR.OCTAL_STRING) {
                 this.advance();
-                this.tokens.push(this.generateString(Operator.OCTAL));
+                this.tokens.push(this.generateString(TOKEN.OPERATOR.OCTAL_STRING));
             }
             // Binary Conversion
-            else if (this.currentChar === Operator.BINARY) {
+            else if (this.currentChar === TOKEN.OPERATOR.BINARY) {
                 this.advance();
-                this.tokens.push(new Token(_Token.BINARY, Operator.BINARY));
+                this.tokens.push(new Token(TOKEN.TYPE.BINARY, TOKEN.OPERATOR.BINARY));
             }
             // HexaDecimal Conversion
-            else if (this.currentChar === Operator.HEXADECIMAL) {
+            else if (this.currentChar === TOKEN.OPERATOR.HEXADECIMAL) {
                 this.advance();
-                this.tokens.push(
-                    new Token(_Token.HEXADECIMAL, Operator.HEXADECIMAL)
-                );
+                this.tokens.push(new Token(TOKEN.TYPE.HEXADECIMAL, TOKEN.OPERATOR.HEXADECIMAL));
             }
             // Octal Conversion
-            else if (this.currentChar === Operator.OCTAL) {
+            else if (this.currentChar === TOKEN.OPERATOR.OCTAL) {
                 this.advance();
-                this.tokens.push(new Token(_Token.OCTAL, Operator.OCTAL));
+                this.tokens.push(new Token(TOKEN.TYPE.OCTAL, TOKEN.OPERATOR.OCTAL));
             }
             // Constant E
             else if (this.currentChar === Operator.E) {
@@ -187,17 +185,17 @@ class Lexer {
         let targetTokenType = "";
 
         switch (TYPE) {
-            case Operator.BINARY:
+            case TOKEN.OPERATOR.BINARY_STRING:
                 ACCEPTED_CHARS = BINARY_DIGITS;
-                targetTokenType = _Token.BINARY_STRING;
+                targetTokenType = TOKEN.TYPE.BINARY_STRING;
                 break;
-            case Operator.HEXADECIMAL:
+            case TOKEN.OPERATOR.HEXADECIMAL_STRING:
                 ACCEPTED_CHARS = HEXADECIMAL_DIGITS.toLowerCase();
-                targetTokenType = _Token.HEXADECIMAL_STRING;
+                targetTokenType = TOKEN.TYPE.HEXADECIMAL_STRING;
                 break;
-            case Operator.OCTAL:
+            case TOKEN.OPERATOR.OCTAL_STRING:
                 ACCEPTED_CHARS = OCTAL_DIGITS;
-                targetTokenType = _Token.OCTAL_STRING;
+                targetTokenType = TOKEN.TYPE.OCTAL_STRING;
                 break;
             default:
                 return;

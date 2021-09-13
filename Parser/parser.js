@@ -72,8 +72,8 @@ class Parser {
                 TOKEN.TYPE.POW,
                 TOKEN.TYPE.NTH_ROOT,
                 TOKEN.TYPE.LOGNBASEX,
-                Token.BITWISE_AND,
-                Token.BITWISE_OR,
+                TOKEN.TYPE.BITWISE_AND,
+                TOKEN.TYPE.BITWISE_OR
             ].includes(this.currentToken.type)
         ) {
             if (this.currentToken.type === TOKEN.TYPE.MULTIPLY) {
@@ -125,14 +125,14 @@ class Parser {
                     node1: result,
                     node2: this.factor(),
                 };
-            } else if (this.currentToken.TokenType === Token.BITWISE_AND) {
+            } else if (this.currentToken.type === TOKEN.TYPE.BITWISE_AND) {
                 this.advance();
                 result = {
                     nodeType: Node.BITWISE_AND,
                     node1: result,
                     node2: this.factor(),
                 };
-            } else if (this.currentToken.TokenType === Token.BITWISE_OR) {
+            } else if (this.currentToken.type === TOKEN.TYPE.BITWISE_OR) {
                 this.advance();
                 result = {
                     nodeType: Node.BITWISE_OR,
@@ -160,22 +160,22 @@ class Parser {
                 nodeType: Node.NUMBER,
                 value: value,
             };
-        } else if (this.currentToken.TokenType === Token.BINARY_STRING) {
-            let value = this.currentToken.TokenValue;
+        } else if (this.currentToken.type === TOKEN.TYPE.BINARY_STRING) {
+            let value = this.currentToken.value;
             this.advance();
             return {
                 nodeType: Node.BINARY_STRING,
                 value: value,
             };
-        } else if (this.currentToken.TokenType === Token.HEXADECIMAL_STRING) {
-            let value = this.currentToken.TokenValue;
+        } else if (this.currentToken.type === TOKEN.TYPE.HEXADECIMAL_STRING) {
+            let value = this.currentToken.value;
             this.advance();
             return {
                 nodeType: Node.HEXADECIMAL_STRING,
                 value: value,
             };
-        } else if (this.currentToken.TokenType === Token.OCTAL_STRING) {
-            let value = this.currentToken.TokenValue;
+        } else if (this.currentToken.type === TOKEN.TYPE.OCTAL_STRING) {
+            let value = this.currentToken.value;
             this.advance();
             return {
                 nodeType: Node.OCTAL_STRING,
@@ -211,19 +211,19 @@ class Parser {
                 nodeType: Node.NAT_LOG,
                 node: this.factor(),
             };
-        } else if (this.currentToken.TokenType === Token.BINARY) {
+        } else if (this.currentToken.type === TOKEN.TYPE.BINARY) {
             this.advance();
             return {
                 nodeType: Node.BINARY,
                 node: this.factor(),
             };
-        } else if (this.currentToken.TokenType === Token.HEXADECIMAL) {
+        } else if (this.currentToken.type === TOKEN.TYPE.HEXADECIMAL) {
             this.advance();
             return {
                 nodeType: Node.HEXADECIMAL,
                 node: this.factor(),
             };
-        } else if (this.currentToken.TokenType === Token.OCTAL) {
+        } else if (this.currentToken.type === TOKEN.TYPE.OCTAL) {
             this.advance();
             return {
                 nodeType: Node.OCTAL,
