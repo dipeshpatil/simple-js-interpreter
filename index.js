@@ -18,7 +18,7 @@ console.log("Expression\n" + text + "\n");
 console.log("Tokens");
 console.log(tokens);
 console.log(
-    "\nTree\n" + util.inspect(tree, { showHidden: false, depth: null })
+  "\nTree\n" + util.inspect(tree, { showHidden: false, depth: null })
 );
 console.log("\nOrder Of Evaluation => " + Order(tree));
 console.log("\nEvaluated Result\n" + Evaluate(tree));
