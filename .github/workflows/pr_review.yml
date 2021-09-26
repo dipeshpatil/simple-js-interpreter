@@ -1,0 +1,15 @@
+name: ESLint PR review
+
+on:
+  push:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: rpkak/ESLint-PR-review@latest
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          src: src
+          eslint-format: table
