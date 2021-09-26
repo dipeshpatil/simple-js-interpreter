@@ -11,5 +11,5 @@ jobs:
       - uses: rpkak/ESLint-PR-review@latest
         with:
           github-token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-          src: src
+          src: .
           eslint-format: table
