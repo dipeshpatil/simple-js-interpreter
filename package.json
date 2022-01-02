@@ -4,10 +4,10 @@
   "description": "A Simple JS Interpreter",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "node index_.js",
     "math": "node Mathjax/mathjax.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "format": "prettier --write \"./**/*.(j|t)s\""
+    "format": "prettier --write \"./**/*.(t)s\""
   },
   "repository": {
     "type": "git",
