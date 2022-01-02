@@ -1,4 +1,4 @@
-type TokenValueType = string | number | undefined;
+type TokenValueType = string | number;
 type TokenType = string;
 
 interface Token {

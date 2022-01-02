@@ -1,0 +1,14 @@
+enum TokenConstants {
+  LPAREN = "TT_LPAREN",
+  RPAREN = "TT_RPAREN",
+  NUMBER = "TT_NUMBER",
+  PLUS = "TT_PLUS",
+  MINUS = "TT_MINUS",
+  MULTIPLY = "TT_MULTIPLY",
+  DIVIDE = "TT_DIVIDE",
+  POW = "TT_POW",
+  INT_DIVIDE = "TT_INT_DIVIDE",
+  MOD = "TT_MOD",
+}
+
+export default TokenConstants;
