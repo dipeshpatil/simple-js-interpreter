@@ -1,6 +1,6 @@
-import Token from "./Token/Token";
-import TokenConstants from "./Token/TokenConstants";
-import OperatorConstants from "./Token/OperatorConstants";
+import Token from "../Token/Token";
+import TokenConstants from "../Token/TokenConstants";
+import OperatorConstants from "../Token/OperatorConstants";
 
 enum LexerConstants {
   DECIMAL = ".",
