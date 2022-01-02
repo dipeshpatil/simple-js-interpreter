@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node index.js",
     "math": "node Mathjax/mathjax.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "format": "prettier --write \"./**/*.(j|t)s\""
   },
   "repository": {
     "type": "git",
