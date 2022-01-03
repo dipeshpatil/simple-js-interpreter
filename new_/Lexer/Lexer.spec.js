@@ -11,7 +11,7 @@ describe("Lexer Tests", () => {
     try {
       new Lexer(illegalCharacterTextString).generateTokens();
     } catch (err) {
-      expect(err).toStrictEqual(new Error("Illegal Character Detected..."));
+      expect(err.message).toStrictEqual("Illegal Character Detected...");
     }
   });
 
@@ -154,8 +154,8 @@ describe("Lexer Tests", () => {
     try {
       new Lexer(numberWithMoreThanOneDecimalPointTextString).generateTokens();
     } catch (err) {
-      expect(err).toStrictEqual(
-        new Error("More Than 1 Decimal Point Detected...")
+      expect(err.message).toStrictEqual(
+        "More Than 1 Decimal Point Detected..."
       );
     }
   });
