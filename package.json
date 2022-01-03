@@ -5,10 +5,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node new_/index.js",
-    "math": "node Mathjax/mathjax.js",
-    "test": "jest new_/**/*.spec.js",
-    "test:coverage": "jest new_/**/*.spec.js --coverage  --coverageDirectory='coverage'",
+    "start": "node index.js",
+    "test": "jest **/*.spec.js",
+    "test:coverage": "jest **/*.spec.js --coverage --coverageDirectory='coverage'",
     "test:watch": "jest --watch",
     "format": "prettier --write \"./**/*.js\""
   },
