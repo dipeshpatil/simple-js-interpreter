@@ -2,7 +2,7 @@ import Lexer from "./Lexer.js";
 import Token from "../Token/Token.js";
 
 const ILLEGAL_CHARACTER_ERROR_MSG = "Illegal Character Detected...";
-const DECIMAL_POINT_ERROR_MESSAGE = "More Than 1 Decimal Point Detected...";
+const DECIMAL_POINT_ERROR_MSG = "More Than 1 Decimal Point Detected...";
 
 describe("Lexer Tests", () => {
   test("Lexer Should Return No Tokens When Nothing Is Passed To Lexer Constructor", () => {
@@ -157,7 +157,7 @@ describe("Lexer Tests", () => {
     try {
       new Lexer(numberWithMoreThanOneDecimalPointTextString).generateTokens();
     } catch (err) {
-      expect(err.message).toBe(DECIMAL_POINT_ERROR_MESSAGE);
+      expect(err.message).toBe(DECIMAL_POINT_ERROR_MSG);
     }
   });
 
