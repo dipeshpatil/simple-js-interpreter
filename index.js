@@ -5,7 +5,7 @@ const Parser = require("./Parser/parser");
 const Evaluate = require("./Evaluator/evaluate");
 const Order = require("./Evaluator/order");
 
-const text = "((((((1 + 2) * 3 + (4 / 2)) ** 2) + 7) LB 2) + 3) * e * pi";
+const text = "";
 // const text = "O(b100 + b100)";
 
 const lexer = new Lexer(text);
