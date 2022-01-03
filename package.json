@@ -3,11 +3,13 @@
   "version": "1.0.0",
   "description": "A Simple JS Interpreter",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "start": "node index.js",
-    "math": "node Mathjax/mathjax.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "format": "prettier --write \"./**/*.(j|t)s\""
+    "test": "jest **/*.spec.js",
+    "test:coverage": "jest **/*.spec.js --coverage --coverageDirectory='coverage'",
+    "test:watch": "jest --watch",
+    "format": "prettier --write \"./**/*.js\""
   },
   "repository": {
     "type": "git",
@@ -18,5 +20,9 @@
   "bugs": {
     "url": "https://github.com/dipeshpatil/simple-js-interpreter/issues"
   },
-  "homepage": "https://github.com/dipeshpatil/simple-js-interpreter#readme"
+  "homepage": "https://github.com/dipeshpatil/simple-js-interpreter#readme",
+  "devDependencies": {
+    "@babel/preset-env": "^7.16.7",
+    "jest": "^27.4.5"
+  }
 }
