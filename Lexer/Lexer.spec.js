@@ -19,16 +19,16 @@ describe("Lexer Tests", () => {
   });
 
   test("Lexer Should Be Able To Tokenize Just An Integer", () => {
-    const justAnInteger = "7";
+    const justAnIntegerTextString = "7";
     const expectedTokens = [new Token("TT_NUMBER", 7)];
-    const tokens = new Lexer(justAnInteger).generateTokens();
+    const tokens = new Lexer(justAnIntegerTextString).generateTokens();
     expect(tokens).toStrictEqual(expectedTokens);
   });
 
   test("Lexer Should Be Able To Tokenize Just A Float", () => {
-    const justAFloat = "7.77";
+    const justAFloatTextString = "7.77";
     const expectedTokens = [new Token("TT_NUMBER", 7.77)];
-    const tokens = new Lexer(justAFloat).generateTokens();
+    const tokens = new Lexer(justAFloatTextString).generateTokens();
     expect(tokens).toStrictEqual(expectedTokens);
   });
 
