@@ -33,11 +33,7 @@ class Lexer {
   }
 
   advance = () => {
-    try {
-      this.currentChar = this.text[this.index++];
-    } catch (e) {
-      this.currentChar = undefined;
-    }
+    this.currentChar = this.text[this.index++];
   };
 
   generateTokens = () => {
@@ -103,10 +99,10 @@ class Lexer {
             new Token(TokenConstants.DIVIDE, OperatorConstants.DIVIDE)
           );
         }
-      } else if (this.currentChar === OperatorConstants.MOD) {
+      } else if (this.currentChar === OperatorConstants.MODULO) {
         /* Mod */
         this.advance();
-        this.tokens.push(new Token(TokenConstants.MOD, OperatorConstants.MOD));
+        this.tokens.push(new Token(TokenConstants.MODULO, OperatorConstants.MODULO));
       }
     }
 
@@ -129,7 +125,7 @@ class Lexer {
       if (this.currentChar === LexerConstants.DECIMAL) {
         decimalPointCount++;
         if (decimalPointCount > 1) {
-          break;
+          throw new Error("More Than 1 Decimal Point Detected...");
         }
       }
 
@@ -139,6 +135,7 @@ class Lexer {
 
     if (currentDigits[0] === LexerConstants.DECIMAL) {
       currentDigits.unshift("0");
+      decimalPointCount++;
     } else if (
       currentDigits[currentDigits.length - 1] === LexerConstants.DECIMAL
     ) {

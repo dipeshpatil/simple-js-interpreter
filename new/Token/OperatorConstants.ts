@@ -7,7 +7,7 @@ enum OperatorConstants {
   DIVIDE = "/",
   POW = "**",
   INT_DIVIDE = "//",
-  MOD = "%",
+  MODULO = "%",
 }
 
 export default OperatorConstants;

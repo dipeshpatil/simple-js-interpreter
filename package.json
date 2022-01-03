@@ -7,7 +7,7 @@
     "start": "node index_.js",
     "math": "node Mathjax/mathjax.js",
     "test": "jest new/**/*.spec.ts",
-    "test:coverage": "jest new/**/*.spec.ts --coverage",
+    "test:coverage": "jest new/**/*.spec.ts --coverage  --coverageDirectory='coverage'",
     "test:watch": "jest --watch",
     "format": "prettier --write \"./**/*.(t)s\""
   },

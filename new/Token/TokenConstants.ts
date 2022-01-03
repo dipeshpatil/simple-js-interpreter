@@ -8,7 +8,7 @@ enum TokenConstants {
   DIVIDE = "TT_DIVIDE",
   POW = "TT_POW",
   INT_DIVIDE = "TT_INT_DIVIDE",
-  MOD = "TT_MOD",
+  MODULO = "TT_MODULO",
 }
 
 export default TokenConstants;
