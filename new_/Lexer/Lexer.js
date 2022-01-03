@@ -1,6 +1,6 @@
-import Token from "../Token/Token";
-import TokenConstants from "../Token/TokenConstants";
-import OperatorConstants from "../Token/OperatorConstants";
+import Token from "../Token/Token.js";
+import TokenConstants from "../Token/TokenConstants.js";
+import OperatorConstants from "../Token/OperatorConstants.js";
 
 const LexerConstants = {
   DECIMAL: ".",
@@ -31,7 +31,7 @@ class Lexer {
         /* Whitespaces */
         this.advance();
       } else if (
-        this.currentChar === "." ||
+        this.currentChar === LexerConstants.DECIMAL ||
         LexerConstants.DIGITS.includes(this.currentChar)
       ) {
         /* Number */
@@ -94,6 +94,8 @@ class Lexer {
         this.tokens.push(
           new Token(TokenConstants.MODULO, OperatorConstants.MODULO)
         );
+      } else {
+        throw new Error("Illegal Character Detected...");
       }
     }
 

@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "description": "A Simple JS Interpreter",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "start": "node index.js",
+    "start": "node new_/index.js",
     "math": "node Mathjax/mathjax.js",
     "test": "jest new_/**/*.spec.js",
     "test:coverage": "jest new_/**/*.spec.js --coverage  --coverageDirectory='coverage'",

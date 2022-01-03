@@ -1,9 +1,20 @@
-import Lexer from "./Lexer";
-import Token from "../Token/Token";
+import Lexer from "./Lexer.js";
+import Token from "../Token/Token.js";
 
 describe("Lexer Tests", () => {
   test("Lexer Should Return No Tokens When Nothing Is Passed To Lexer Constructor", () => {
     expect(new Lexer().generateTokens()).toStrictEqual([]);
+  });
+
+  test("Lexer Should Throw An Error When Illegal Character Is Entered As Input", () => {
+    const illegalCharacterTextString = "1 + a";
+    try {
+      new Lexer(illegalCharacterTextString).generateTokens();
+    } catch (err) {
+      expect(err).toStrictEqual(
+        new Error("Illegal Character Detected...")
+      );
+    }
   });
 
   test("Lexer Should Be Able To Tokenize Just An Integer", () => {
