@@ -1,7 +1,7 @@
-name: Unit Tests Check
+name: Unit Tests Coverage Check
 on:
   push:
-    branches-ignore:
+    branches:
       - main
 jobs:
   build:
@@ -17,9 +17,9 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: Install Packages
         run: npm ci
-      - name: Running Unit Tests
+      - name: Running Unit Tests Coverage
         run: |
           git config --global user.email ${{secrets.EMAIL}}
           git config --global user.name ${{secrets.USERNAME}}
           git remote set-url origin https://${{secrets.PERSONAL_ACCESS_TOKEN}}@github.com/${{secrets.USERNAME}}/simple-js-interpreter.git
-          npm run test
+          npm run test:coverage
