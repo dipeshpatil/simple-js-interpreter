@@ -11,9 +11,7 @@ describe("Lexer Tests", () => {
     try {
       new Lexer(illegalCharacterTextString).generateTokens();
     } catch (err) {
-      expect(err).toStrictEqual(
-        new Error("Illegal Character Detected...")
-      );
+      expect(err).toStrictEqual(new Error("Illegal Character Detected..."));
     }
   });
 
